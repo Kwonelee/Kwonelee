@@ -121,9 +121,10 @@ config dns_servers
 config dns_servers
 	option enabled '0'
 	option group 'nameserver'
-	option ip '1.1.1.1'
+	option ip '192.168.5.88'
 	option type 'udp'
 	option disable_ipv6 '0'
+	option port '5225'
 
 config dns_servers
 	option enabled '0'
