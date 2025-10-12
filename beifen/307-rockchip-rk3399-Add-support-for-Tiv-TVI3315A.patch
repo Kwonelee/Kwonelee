@@ -9,7 +9,7 @@
 +
 +/ {
 +	model = "Rocktech MPC1903";
-+	compatible = "rocktech,mpc1903", "rockchip,rk3399";
++	compatible = "tvi,tvi3315a", "rockchip,rk3399";
 +
 +	aliases {
 +		mmc0 = &sdmmc;
