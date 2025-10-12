@@ -93,7 +93,7 @@
 +CONFIG_ERRNO_STR=y
 --- /dev/null
 +++ b/arch/arm/dts/rk3399-tvi3315a.dts
-@@ -0,0 +1,758 @@
+@@ -0,0 +1,920 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/dts-v1/;
 +
