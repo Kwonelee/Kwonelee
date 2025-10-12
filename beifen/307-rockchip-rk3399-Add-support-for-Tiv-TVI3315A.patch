@@ -1,5 +1,5 @@
 --- /dev/null
-+++ b/arch/arm/dts/rk3399-mpc1903-u-boot.dtsi
++++ b/arch/arm/dts/rk3399-tvi3315a-u-boot.dtsi
 @@ -0,0 +1,14 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +
@@ -16,7 +16,7 @@
 +	pinctrl-0 = <&sdmmc_bus4 &sdmmc_clk &sdmmc_cmd &sdmmc_cd>;
 +};
 --- /dev/null
-+++ b/configs/mpc1903-rk3399_defconfig
++++ b/configs/tvi3315a-rk3399_defconfig
 @@ -0,0 +1,73 @@
 +CONFIG_ARM=y
 +CONFIG_SKIP_LOWLEVEL_INIT=y
@@ -25,7 +25,7 @@
 +CONFIG_SPL_GPIO=y
 +CONFIG_NR_DRAM_BANKS=1
 +CONFIG_ENV_OFFSET=0x3F8000
-+CONFIG_DEFAULT_DEVICE_TREE="rk3399-mpc1903"
++CONFIG_DEFAULT_DEVICE_TREE="rk3399-tvi3315a"
 +CONFIG_DM_RESET=y
 +CONFIG_ROCKCHIP_RK3399=y
 +CONFIG_TARGET_EVB_RK3399=y
@@ -33,7 +33,7 @@
 +CONFIG_DEBUG_UART_CLOCK=24000000
 +CONFIG_SYS_LOAD_ADDR=0x800800
 +CONFIG_DEBUG_UART=y
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-mpc1903.dtb"
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-tvi3315a.dtb"
 +CONFIG_DISPLAY_BOARDINFO_LATE=y
 +CONFIG_SPL_MAX_SIZE=0x40000
 +CONFIG_SPL_PAD_TO=0x7f8000
