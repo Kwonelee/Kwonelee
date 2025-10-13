@@ -1,4 +1,4 @@
-![Anurag's github stats](https://github-readme-stats.vercel.app/api?username=Kwonelee)
+<img src="https://github-readme-stats.vercel.app/api?username=Kwonelee&show_icons=true&theme=Default&locale=cn&hide=prs&rank_icon=github" alt="logo" align="right" width="50%" />
 
 🤖 **Welcome to my GitHub!** 🚀
 
