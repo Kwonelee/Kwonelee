@@ -1,4 +1,4 @@
-<img src="https://github-readme-stats.vercel.app/api?username=Kwonelee&show_icons=true&bg_color=0,E8F0F1,B8CEDA,8FAAB9,6A7B8B&theme=graywhite&locale=cn&hide=prs&rank_icon=github" alt="logo" align="right" width="50%" />
+<img src="https://github-readme-stats.vercel.app/api?username=Kwonelee&show_icons=true&bg_color=0,2C0735,4E148C,913FDB,E86ED0&theme=graywhite&locale=cn&hide=prs&rank_icon=github" alt="logo" align="right" width="50%" />
 
 🤖 **Welcome to my GitHub!** 🚀
 
