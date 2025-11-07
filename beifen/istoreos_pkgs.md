@@ -13,11 +13,11 @@
 - [sbwml/openwrt_pkgs](https://github.com/sbwml/openwrt_pkgs)
 
 
-## 📦 基础信息
-- **硬件平台**: Rockchip ARMv8
-- **源码基础**: [OpenWrt 官方仓库](https://github.com/openwrt/openwrt)
-- **管理地址**: `192.168.5.100`
-- **登录密码**: `password`（可为空）
+- 📦 **基础信息**
+  - **硬件平台**: Rockchip ARMv8
+  - **源码基础**: [OpenWrt 官方仓库](https://github.com/openwrt/openwrt)
+  - **管理地址**: `192.168.5.100`
+  - **登录密码**: `password`
 
 ## ⚡ 性能增强
 - **硬件优化**: CPU动态调频、PWM风扇控制
