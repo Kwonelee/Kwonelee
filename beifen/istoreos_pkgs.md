@@ -13,30 +13,20 @@
 - [sbwml/openwrt_pkgs](https://github.com/sbwml/openwrt_pkgs)
 
 
-## 🛠 源码基础
-- **平台架构**: Rockchip ARMv8
-- **源码来源**: [OpenWrt 官方仓库](https://github.com/openwrt/openwrt)
-
-## ⚙️ 默认设置
+## 📦 基础信息
+- **硬件平台**: Rockchip ARMv8
+- **源码基础**: [OpenWrt 官方仓库](https://github.com/openwrt/openwrt)
 - **管理地址**: `192.168.5.100`
 - **登录密码**: `password`（可为空）
-- **访问方式**: 所有 LAN 口支持网页终端和 SSH
-- **安全保护**: WAN 口默认启用防火墙
-- **容器加速**: Docker 已配置国内镜像源
 
-## 🚀 Rockchip 性能增强
-- **CPU 管理**: 动态调频与性能调节
-- **散热控制**: PWM 风扇控制
-- **系统优化**: 
-  - 中断负载均衡
-  - Multi-Gen LRU 页面回收
-  - Shortcut-FE 流量卸载
+## ⚡ 性能增强
+- **硬件优化**: CPU动态调频、PWM风扇控制
+- **系统调优**: 中断负载均衡、Multi-Gen LRU
+- **网络加速**: Shortcut-FE流量卸载
 
-## 🌐 网络与容器
-- **网络特性**:
-  - 支持 NAT6
-  - 全锥型 NAT（兼容 Nftables / Broadcom）
-- **容器服务**:
-  - Docker 28.5.2
-  - 桥接网络 IPv6 支持
-- **Web 服务**: 使用 nginx 替代 uhttpd
+## 🌐 网络与服务
+- **网络功能**: NAT6、全锥型NAT（兼容Nftables/Broadcom）
+- **容器支持**: Docker 28.5.2（国内镜像源、IPv6桥接）
+- **Web服务**: nginx替代uhttpd
+- **安全防护**: WAN口防火墙默认启用
+- **远程访问**: 所有LAN口支持网页终端和SSH
