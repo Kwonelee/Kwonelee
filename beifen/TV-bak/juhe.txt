@@ -1,0 +1,32 @@
+{
+    "urls": [
+    {
+            "url": "http://mitvbox.xyz/%E5%B0%8F%E7%B1%B3/DEMO.json",
+            "name": "😀小米"
+        },
+    {
+            "url": "https://xn--2aa2-rp5imh.v.nxog.top/api.php?id=3",
+            "name": "🦀欧歌"
+        },
+    {
+            "url": "https://9280.kstore.space/wex.json",
+            "name": "🐂放牛娃"
+        },
+    {
+            "url": "http://ok321.top/tv",
+            "name": "👌OK"
+        },
+    {
+            "url": "http://www.饭太硬.com/tv",
+            "name": "🍚饭太硬"
+        },
+    {
+            "url": "https://github.moeyy.xyz/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/main/XYQTVBox.json",
+            "name": "🦐香雅情"
+        },
+    {
+            "url": "https://github.moeyy.xyz/https://raw.githubusercontent.com/gaotianliuyun/gao/master/0827.json",
+            "name": "🐝fongmi"
+        }
+    ]
+}

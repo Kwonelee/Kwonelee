@@ -1,0 +1,131 @@
+name: 💿 St1_Build-Rootfs-test
+on:
+  workflow_dispatch:
+    inputs:
+      network_settings:
+        description: "请选择初始网络配置"
+        required: true
+        default: 'static'
+        type: choice
+        options:
+          - 'static'
+      ipaddr:
+        description: '请输入管理IP'
+        required: true
+        default: '192.168.5.88'
+      gateway:
+        description: '请输入默认网关'
+        required: true
+        default: '192.168.5.1'
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: ⚙️ 设置IP和网关
+      run: |
+        echo "当前网络配置路径"
+        CONFIG_PATH="./files/etc/uci-defaults/99-custom.sh"
+        echo $CONFIG_PATH
+        if [ "${{ inputs.network_settings }}" = "static" ]; then
+           echo "删除网络设置-dhcp"
+           sed -i '44,105d' "$CONFIG_PATH"
+           echo "替换默认配置"
+           sed -i "/ipaddr/s/192.168.5.88/${{ inputs.ipaddr }}/g" "$CONFIG_PATH"
+           sed -i "/gateway/s/192.168.5.1/${{ inputs.gateway }}/g" "$CONFIG_PATH"
+        else
+           echo "删除网络设置-static"
+           sed -i '36,42d' "$CONFIG_PATH"
+        fi
+        echo "输出配置"
+        cat $CONFIG_PATH
+
+    - name: ⏬ 安装依赖
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential libncurses5-dev zstd curl unzip tree
+
+    - name: ⏬ 下载 ImageBuilder
+      run: |
+        curl -L -o imagebuilder.tar.zst https://github.com/Kwonelee/iStoreOS-Actions/releases/download/iStoreOS-ImageBuilder-20250905/istoreos-imagebuilder-armsr-armv8.Linux-x86_64.tar.zst
+        tar --use-compress-program=unzstd -xvf imagebuilder.tar.zst
+        mv istoreos-imagebuilder-* imagebuilder
+
+    - name: ⏬ 复制并设置必备文件
+      run: |
+        cp arm64/{build24.sh,Makefile} imagebuilder/
+        #cp arm64/repositories.conf imagebuilder/
+        cp shell/{prepare-packages.sh,custom-packages.sh} imagebuilder/
+        find files/packages/ -name "*.ipk" -exec cp {} imagebuilder/packages/ \;
+        
+        mkdir -p imagebuilder/files/etc/{uci-defaults,opkg,banner1}
+        #添加开机启动脚本
+        cp files/etc/uci-defaults/99-custom.sh imagebuilder/files/etc/uci-defaults/
+        #替换软件源
+        cp files/etc/opkg/distfeeds.conf imagebuilder/files/etc/opkg/
+        #替换O大打包脚本的默认banner
+        cp files/etc/banner imagebuilder/files/etc/banner1/
+        mkdir -p imagebuilder/files/etc/openclash/core
+        cp files/etc/openclash/core/clash_meta imagebuilder/files/etc/openclash/core/
+        
+        cd imagebuilder
+        echo "启用rootfs.tar.gz配置并停用非必要配置"
+        sed -i 's/# CONFIG_TARGET_ROOTFS_TARGZ is not set/CONFIG_TARGET_ROOTFS_TARGZ=y/' .config
+        sed -i "s|CONFIG_TARGET_ROOTFS_SQUASHFS=.*|# CONFIG_TARGET_ROOTFS_SQUASHFS is not set|g" .config
+        sed -i "s|CONFIG_TARGET_IMAGES_GZIP=.*|# CONFIG_TARGET_IMAGES_GZIP is not set|g" .config
+        echo "打印action目录结构"
+        tree -L 1
+
+    - name: 🧱 构建iStoreOS-rootfs
+      run: |
+        cd imagebuilder
+        make image PROFILE=generic PACKAGES="\
+           -acpid attr base-files bash -bc blkid block-mount -blockd -bsdtar btrfs-progs busybox bzip2 \
+           cgi-io -chattr comgt comgt-ncm containerd -coremark coreutils -coreutils-base64 -coreutils-nohup \
+           -coreutils-truncate curl docker docker-compose dockerd dosfstools -dumpe2fs -e2freefrag e2fsprogs \
+           -exfat-mkfs -f2fs-tools -f2fsck fdisk -gawk -getopt -git -gzip hostapd-common -iconv iw iwinfo jq \
+           jshn kmod-brcmfmac kmod-brcmutil kmod-cfg80211 kmod-mac80211 libjson-script liblucihttp \
+           liblucihttp-lua losetup -lsattr lsblk lscpu mkf2fs mount-utils openssl-util parted \
+           -perl-http-date perlbase-file -perlbase-getopt perlbase-time -perlbase-unicode perlbase-utf8 \
+           -pigz ppp ppp-mod-pppoe pv -rename resize2fs runc tar tini ttyd tune2fs \
+           uclient-fetch uhttpd uhttpd-mod-ubus unzip uqmi usb-modeswitch uuidgen wget-ssl -whereis \
+           -which -wpad-basic wwan -xfs-fsck -xfs-mkfs xz xz-utils -ziptool -zoneinfo-asia -zoneinfo-core -zstd \
+           \
+           luci luci-base luci-compat luci-i18n-base-zh-cn luci-lib-base luci-lib-docker \
+           luci-lib-ip luci-lib-ipkg luci-lib-jsonc luci-lib-nixio luci-mod-admin-full luci-mod-network \
+           luci-mod-status luci-mod-system luci-proto-3g -luci-proto-ipip luci-proto-ipv6 \
+           luci-proto-ncm -luci-proto-openconnect luci-proto-ppp luci-proto-qmi luci-proto-relay \
+           \
+           -dnsmasq dnsmasq-full luci-i18n-firewall-zh-cn luci-i18n-ttyd-zh-cn luci-i18n-package-manager-zh-cn \
+           luci-theme-argon luci-i18n-argon-zh-cn luci-app-argon-config luci-i18n-argon-config-zh-cn \
+           \
+           luci-i18n-quickstart-zh-cn luci-i18n-dockerman-zh-cn \
+           luci-app-amlogic luci-i18n-amlogic-zh-cn \
+           \
+           -libustream-mbedtls" FILES="files"
+
+    - name: 🚀 上传到 Release
+      uses: softprops/action-gh-release@v2.2.1
+      with:
+        tag_name: iStoreOS-24.10-TEST-${{ inputs.network_settings }}
+        body: |
+          🔄 版本： iStoreOS-24.10.2-TEST（imagebuilder构建，测试版）
+          
+          📂 来源： https://fw.koolcenter.com/iStoreOS/ib/armsr/
+          
+          🧠 内核： Please Login to iStoreOS → System → Amlogic Service → Replace the Kernel
+          
+          🧩 集成： 精简集成测试
+          
+          👤 用户名： root
+          
+          🔒 密码： 无
+          
+          🌐 IP： ${{ inputs.ipaddr }}
+        files: |
+          imagebuilder/bin/targets/armsr/armv8/*generic-rootfs.tar.gz
+      env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
