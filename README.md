@@ -1,4 +1,4 @@
-<img src="https://github-readme-stats.vercel.app/api?username=Kwonelee&show_icons=true&theme=vue&hide=prs&rank_icon=github" alt="logo" align="right" width="50%" />
+<img src="https://komarev.com/ghpvc/?username=Kwonelee&show_icons=true&theme=vue&hide=prs&rank_icon=github" alt="logo" align="right" width="50%" />
 
 🤖 **Welcome to my GitHub!** 🚀
 
