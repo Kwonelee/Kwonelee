@@ -1,4 +1,4 @@
-<img src="https://streak-stats.demolab.com/?user=Kwonelee&mode=weekly&hide_border=true&theme=tokyonight" alt="logo" align="right" width="50%" />
+<img src="https://streak-stats.demolab.com/?user=Kwonelee&mode=weekly&hide_border=true&theme=vue" alt="logo" align="right" width="50%" />
 
 🤖 **Welcome to my GitHub!** 🚀
 
