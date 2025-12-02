@@ -1,4 +1,4 @@
-<img src="https://github-readme-stats.vercel.app/api?username=Kwonelee&show_icons=true&theme=vue&hide=prs&rank_icon=github" alt="logo" align="right" width="50%" />
+<img src="https://streak-stats.demolab.com/?user=Kwonelee&mode=weekly&hide_border=true&theme=tokyonight" alt="logo" align="right" width="50%" />
 
 🤖 **Welcome to my GitHub!** 🚀
 
