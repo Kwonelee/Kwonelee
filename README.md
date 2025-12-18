@@ -1,4 +1,4 @@
-<img src="https://github-readme-stats.blog.cmliussss.com/api?username=Kwonelee&theme=algolia&show_icons=true" alt="logo" align="right" width="50%" />
+<img src="https://github-readme-stats.blog.cmliussss.com/api?username=Kwonelee&theme=vue&show_icons=true" alt="logo" align="right" width="50%" />
 
 🤖 **Welcome to my GitHub!** 🚀
 
