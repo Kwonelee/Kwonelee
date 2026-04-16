@@ -1822,12 +1822,12 @@
                 smooth:true, 
                 symbol:'none', 
                 lineStyle: { width: 1.2, color: '#40A9FF' },  // 蓝色折线
-                    areaStyle: { 
-						opacity: 1,  // 渐变自带透明度，这里设为1
-						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-							{ offset: 0, color: 'rgba(64, 169, 255, 0.6)' },     // #40A9FF 60%
-							{ offset: 1, color: 'rgba(230, 247, 255, 0.1)' }      // #E6F7FF 10%
-						])
+				areaStyle: { 
+                    opacity: 1,  // 渐变自带透明度，这里设为1
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: 'rgba(64, 169, 255, 0.6)' },     // #40A9FF 60%
+						{ offset: 1, color: 'rgba(230, 247, 255, 0.1)' }      // #E6F7FF 10%
+					])
                 },
                 data:down 
             }
