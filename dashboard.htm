@@ -1744,7 +1744,7 @@
     for (var i=0;i<30;i++){ x.push(i-29); }
     lineWan.setOption({
         backgroundColor: 'transparent',
-        // color: ['#60a5fa', '#22c55e'],  // 蓝色=上行，绿色=下行（与图片一致）
+        color: ['#D946EF', '#40A9FF'],  // 蓝色=上行，绿色=下行（与图片一致）
         textStyle:{ color: axisLabelColor },
         animation: false,  // 禁用初始动画
         animationDurationUpdate: 0,  // 更新时无动画延迟，实现平滑平移
@@ -1807,12 +1807,12 @@
                 smooth:true, 
                 symbol:'none', 
                 lineStyle: { width: 1.2, color: '#D946EF' },  // 紫色折线
-				areaStyle: {
-                    opacity: 1,  // 渐变自带透明度，这里设为1
-					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: 'rgba(217, 70, 239, 0.6)' },    // #D946EF 60%
-						{ offset: 1, color: 'rgba(243, 232, 255, 0.1)' }     // #F3E8FF 10%
-					])
+                areaStyle:{
+                    opacity: 1,
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                        { offset: 0, color: 'rgba(217, 70, 239, 0.6)' },
+                        { offset: 1, color: 'rgba(243, 232, 255, 0.1)' }
+                    ])
                 },
                 data:up 
             },
@@ -1821,13 +1821,13 @@
                 type:'line', 
                 smooth:true, 
                 symbol:'none', 
-                lineStyle: { width: 1.2, color: '#40A9FF' },  // 蓝色折线
-				areaStyle: { 
-                    opacity: 1,  // 渐变自带透明度，这里设为1
+                lineStyle: { width: 1.2, color: '#40A9FF' },  // 蓝色
+                areaStyle:{
+                    opacity: 1,
                     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{ offset: 0, color: 'rgba(64, 169, 255, 0.6)' },     // #40A9FF 60%
-						{ offset: 1, color: 'rgba(230, 247, 255, 0.1)' }      // #E6F7FF 10%
-					])
+                        { offset: 0, color: 'rgba(64, 169, 255, 0.6)' },
+                        { offset: 1, color: 'rgba(230, 247, 255, 0.1)' }
+                    ])
                 },
                 data:down 
             }
