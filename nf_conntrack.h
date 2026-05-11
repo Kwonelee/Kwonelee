@@ -72,6 +72,13 @@ struct nf_conntrack_net {
 #include <net/netfilter/ipv4/nf_conntrack_ipv4.h>
 #include <net/netfilter/ipv6/nf_conntrack_ipv6.h>
 
+struct nf_fwx_data{
+	u32 mark;
+	u32 app_id;
+	u32 match_status;
+	u8 action;
+	u8 *host;
+};
 struct nf_conn {
 	/* Usage count in here is 1 for hash table, 1 per skb,
 	 * plus 1 for any connection(s) we are `master' for
@@ -121,6 +128,8 @@ struct nf_conn {
 	/* Extensions */
 	struct nf_ct_ext *ext;
 
+	/*FanchmWrt Data*/
+	struct nf_fwx_data fwx_data;
 	/* Storage reserved for other modules, must be the last member */
 	union nf_conntrack_proto proto;
 };
