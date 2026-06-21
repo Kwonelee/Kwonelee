@@ -14,16 +14,6 @@ proxy-providers:
       interval: 300
     proxy: ➡️ 直连
 
-  #Webfree:
-    #url: "https://de.kwone.dpdns.org/96b45910-5030-11f1-b68e-6fb3d7da79db"
-    #type: http
-    #interval: 86400
-    #health-check:
-      #enable: false
-      #url: https://www.gstatic.com/generate_204
-      #interval: 300
-    #proxy: ➡️ 直连
-
 # 节点信息
 proxies:
   - {name: ➡️ 直连, type: direct}
