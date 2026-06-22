@@ -119,7 +119,7 @@ rules:
   - RULE-SET,Gemini / Domain,🤖 AI
   - RULE-SET,Groq / Domain,🤖 AI
   - RULE-SET,Grok / Domain,🤖 AI
-  - RULE-SET,Github / Domain,📦 GitHub
+  - RULE-SET,GitHub / Domain,📦 GitHub
   - RULE-SET,Youtube / Domain,🎞️ YouTube
   - RULE-SET,Google / Domain,🅶 Google
   - RULE-SET,Telegram / Domain,✈️ Telegram
