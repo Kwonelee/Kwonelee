@@ -91,7 +91,7 @@ proxy-groups:
   - {name: 🕊️ Twitter, <<: *default}
   - {name: 🎬️ Netflix, <<: *default}
   - {name: 🎵 TikTok, <<: *default}
-  - {name: 📽️ Other Stream, <<: *default}
+  - {name: 🎬 Other Stream, <<: *default}
   - {name: ⏱️ Test, <<: *default}
   - {name: 🌍 国外, <<: *default}
   - {name: ➡️ 国内, type: select, proxies: [➡️ 直连,🚀 默认节点,🔄 所有-自动,🌐 CF-手动,🇸🇬 新加坡-自动,🇯🇵 日本-自动,🇭🇰 香港-自动,🇨🇳 台湾-自动,🇰🇷 韩国-自动,🇺🇲 美国-自动,🗺 其他-自动,👉 所有-手动,🚫 拒绝]}
@@ -126,8 +126,8 @@ rules:
   - RULE-SET,Twitter / Domain,🕊️ Twitter
   - RULE-SET,Netflix / Domain,🎬️ Netflix
   - RULE-SET,TikTok / Domain,🎵 TikTok
-  - RULE-SET,Disney / Domain,📽️ Other Stream
-  - RULE-SET,PrimeVideo / Domain,📽️ Other Stream
+  - RULE-SET,Disney / Domain,🎬 Other Stream
+  - RULE-SET,PrimeVideo / Domain,🎬 Other Stream
   - RULE-SET,Google / IP,🌐 Google,no-resolve
   - RULE-SET,Telegram / IP,✈️ Telegram,no-resolve
   - RULE-SET,Netflix / IP,🎬️ Netflix,no-resolve
