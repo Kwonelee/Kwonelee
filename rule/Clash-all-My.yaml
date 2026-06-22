@@ -112,6 +112,14 @@ proxy-groups:
 # ========================
 rules:
   - RULE-SET,AI / Domain,🤖 AI
+  - RULE-SET,ChatGPT / Domain,🤖 AI
+  - RULE-SET,Claude / Domain,🤖 AI
+  - RULE-SET,Meta AI / Domain,🤖 AI
+  - RULE-SET,Perplexity / Domain,🤖 AI
+  - RULE-SET,Copilot / Domain,🤖 AI
+  - RULE-SET,Gemini / Domain,🤖 AI
+  - RULE-SET,Groq / Domain,🤖 AI
+  - RULE-SET,Grok / Domain,🤖 AI
   - RULE-SET,Github / Domain,📘 GitHub
   - RULE-SET,Youtube / Domain,🎞️ YouTube
   - RULE-SET,Google / Domain,🌐 Google
