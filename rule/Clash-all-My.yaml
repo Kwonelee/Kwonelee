@@ -111,7 +111,6 @@ proxy-groups:
 # 规则引擎（rules）
 # ========================
 rules:
-  - RULE-SET,AI / Domain,🤖 AI
   - RULE-SET,ChatGPT / Domain,🤖 AI
   - RULE-SET,Claude / Domain,🤖 AI
   - RULE-SET,Meta AI / Domain,🤖 AI
