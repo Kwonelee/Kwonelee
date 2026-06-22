@@ -7,7 +7,7 @@ proxy-providers:
   CF优选:
     url: "XXXXXX"
     type: http
-    interval: 86400
+    interval: 604800
     health-check:
       enable: false
       url: https://www.gstatic.com/generate_204
