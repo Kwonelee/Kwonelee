@@ -129,7 +129,7 @@ rules:
   - RULE-SET,TikTok / Domain,🎵 TikTok
   - RULE-SET,Disney / Domain,📽️ Disney
   - RULE-SET,PrimeVideo / Domain,🎥 PrimeVideo
-    - RULE-SET,Google / IP,🌐 Google,no-resolve
+  - RULE-SET,Google / IP,🌐 Google,no-resolve
   - RULE-SET,Telegram / IP,🙋 Telegram,no-resolve
   - RULE-SET,Netflix / IP,🎬️ Netflix,no-resolve
   - RULE-SET,Proxy / Domain,🌍 国外
