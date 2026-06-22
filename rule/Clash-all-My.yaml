@@ -79,10 +79,10 @@ profile:
 # ========================
 default: &default
   type: select
-  proxies: [🚀 默认节点,🔄 所有-自动,🌐 CF-手动,🇸🇬 新加坡-自动,🇯🇵 日本-自动,🇭🇰 香港-自动,🇨🇳 台湾-自动,🇰🇷 韩国-自动,🇺🇲 美国-自动,🗺 其他-自动,👉 所有-手动,➡️ 直连,🚫 拒绝]
+  proxies: [🚀 默认节点,🔄 所有-自动,☁️ CF-手动,🇸🇬 新加坡-自动,🇯🇵 日本-自动,🇭🇰 香港-自动,🇨🇳 台湾-自动,🇰🇷 韩国-自动,🇺🇲 美国-自动,🗺 其他-自动,👉 所有-手动,➡️ 直连,🚫 拒绝]
 
 proxy-groups:
-  - {name: 🚀 默认节点, type: select, proxies: [🔄 所有-自动,🌐 CF-手动,🇸🇬 新加坡-自动,🇯🇵 日本-自动,🇭🇰 香港-自动,🇨🇳 台湾-自动,🇰🇷 韩国-自动,🇺🇲 美国-自动,🗺 其他-自动,👉 所有-手动,➡️ 直连,🚫 拒绝]}
+  - {name: 🚀 默认节点, type: select, proxies: [🔄 所有-自动,☁️ CF-手动,🇸🇬 新加坡-自动,🇯🇵 日本-自动,🇭🇰 香港-自动,🇨🇳 台湾-自动,🇰🇷 韩国-自动,🇺🇲 美国-自动,🗺 其他-自动,👉 所有-手动,➡️ 直连,🚫 拒绝]}
   - {name: 🤖 AI, <<: *default}
   - {name: 📦 GitHub, <<: *default}
   - {name: 🎞️ YouTube, <<: *default}
@@ -94,10 +94,10 @@ proxy-groups:
   - {name: 🎬 Other Stream, <<: *default}
   - {name: ⏱️ Test, <<: *default}
   - {name: 🌍 国外, <<: *default}
-  - {name: ➡️ 国内, type: select, proxies: [➡️ 直连,🚀 默认节点,🔄 所有-自动,🌐 CF-手动,🇸🇬 新加坡-自动,🇯🇵 日本-自动,🇭🇰 香港-自动,🇨🇳 台湾-自动,🇰🇷 韩国-自动,🇺🇲 美国-自动,🗺 其他-自动,👉 所有-手动,🚫 拒绝]}
+  - {name: ➡️ 国内, type: select, proxies: [➡️ 直连,🚀 默认节点,🔄 所有-自动,☁️ CF-手动,🇸🇬 新加坡-自动,🇯🇵 日本-自动,🇭🇰 香港-自动,🇨🇳 台湾-自动,🇰🇷 韩国-自动,🇺🇲 美国-自动,🗺 其他-自动,👉 所有-手动,🚫 拒绝]}
   - {name: 👉 所有-手动, type: select, include-all: true, filter: "^((?!(➡️ 直连|🚫 拒绝)).)*$"}
   - {name: 🔄 所有-自动, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "^((?!(➡️ 直连|🚫 拒绝|优选|CF|snippets|online)).)*$"}
-  - {name: 🌐 CF-手动, type: select, include-all: true, filter: "(?=.*(优选|CF|snippets|online)).*$"}
+  - {name: ☁️ CF-手动, type: select, include-all: true, filter: "(?=.*(优选|CF|snippets|online)).*$"}
   - {name: 🇸🇬 新加坡-自动, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(广新|新加坡|SG|坡|狮城|🇸🇬|Singapore)).*$"}
   - {name: 🇯🇵 日本-自动, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan)).*$"}
   - {name: 🇭🇰 香港-自动, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(广港|香港|HK|Hong Kong|🇭🇰|HongKong)).*$"}
