@@ -61,7 +61,7 @@ ipv6: true
 # ========================
 tun:
   enable: true
-  stack: mixed
+  stack: gvisor
   device: utun
   endpoint-independent-nat: true
   auto-route: false
