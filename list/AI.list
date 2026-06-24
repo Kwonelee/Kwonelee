@@ -30,3 +30,10 @@ DOMAIN-SUFFIX,metademolab.com
 DOMAIN-SUFFIX,genspark.ai
 DOMAIN-SUFFIX,manus.im
 DOMAIN-SUFFIX,skywork.ai
+
+# NAME: perplexity
+DOMAIN,ppl-ai-file-upload.s3.amazonaws.com
+DOMAIN,pplx-res.cloudinary.com
+DOMAIN-SUFFIX,perplexity.ai
+DOMAIN-SUFFIX,perplexity.com
+DOMAIN-SUFFIX,pplx.ai
