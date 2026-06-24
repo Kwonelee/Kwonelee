@@ -37,3 +37,7 @@ DOMAIN,pplx-res.cloudinary.com
 DOMAIN-SUFFIX,perplexity.ai
 DOMAIN-SUFFIX,perplexity.com
 DOMAIN-SUFFIX,pplx.ai
+
+# NAME: Copilot
+DOMAIN,copilot.microsoft.com
+DOMAIN-SUFFIX,bing.com
