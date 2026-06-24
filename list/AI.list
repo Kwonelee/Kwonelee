@@ -54,3 +54,9 @@ DOMAIN-SUFFIX,aistudio-pa.clients6.google.com
 DOMAIN-SUFFIX,googleusercontent.com
 DOMAIN-SUFFIX,android.googleapis.com
 DOMAIN-SUFFIX,makersuite.google.com
+
+# NAME: groq
+DOMAIN-SUFFIX,groq.com
+
+# NAME: Grok
+DOMAIN-SUFFIX,grok.com
