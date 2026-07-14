@@ -17,6 +17,10 @@
             "name": "🍚饭太硬"
         },
     {
+            "url": "http://摸鱼儿.cc",
+            "name": "🐟摸鱼儿"
+        },
+    {
             "url": "http://www.英格里希嗷呜.top/tv",
             "name": "👌OK"
         }
