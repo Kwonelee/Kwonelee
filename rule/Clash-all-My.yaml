@@ -85,11 +85,11 @@ proxy-groups:
   - {name: 默认节点, <<: *default_1, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Rocket.png}
   - {name: AD, <<: *default_ad, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/AdBlack.png}
   - {name: AI, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/AI.png}
-  - {name: 📦 GitHub, <<: *default}
+  - {name: GitHub, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/GitHub.png}
   - {name: YouTube, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/YouTube.png}
   - {name: Google, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Google.png}
   - {name: Telegram, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Telegram.png}
-  - {name: 🕊️ Twitter, <<: *default}
+  - {name: X, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/X.png}
   - {name: Netflix, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Netflix.png}
   - {name: TikTok, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/TikTok.png}
   - {name: 🎬 Other Stream, <<: *default}
@@ -112,11 +112,11 @@ proxy-groups:
 # ========================
 rules:
   - RULE-SET,AD / Domain,AD
-  - RULE-SET,GitHub / Domain,📦 GitHub
+  - RULE-SET,GitHub / Domain,GitHub
   - RULE-SET,Youtube / Domain,YouTube
   - RULE-SET,Google / Domain,Google
   - RULE-SET,Telegram / Domain,Telegram
-  - RULE-SET,Twitter / Domain,🕊️ Twitter
+  - RULE-SET,X / Domain,X
   - RULE-SET,Netflix / Domain,Netflix
   - RULE-SET,TikTok / Domain,TikTok
   - RULE-SET,Disney / Domain,🎬 Other Stream
@@ -145,7 +145,7 @@ rule-providers:
   Youtube / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/youtube.mrs"}
   Google / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs"}
   Telegram / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/telegram.mrs"} 
-  Twitter / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/x.mrs"}
+  X / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/x.mrs"}
   Netflix / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/netflix.mrs"}
   TikTok / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/tiktok.mrs"}
   Disney / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/disney.mrs"}
