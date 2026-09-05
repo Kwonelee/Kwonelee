@@ -77,10 +77,10 @@ profile:
 # ========================
 # 策略组定义
 # ========================
-default_jd: &default_jd {type: select, proxies: [CF-手动,所有-自动,🇸🇬 新加坡-自动,🇯🇵 日本-自动,🇭🇰 香港-自动,🇨🇳 台湾-自动,🇰🇷 韩国-自动,🇺🇲 美国-自动,🗺 其他-自动,所有-手动,➡️ 直连,🚫 拒绝]}
+default_jd: &default_jd {type: select, proxies: [CF-手动,所有-自动,🇸🇬 新加坡-自动,🇯🇵 日本-自动,🇭🇰 香港-自动,🇨🇳 台湾-自动,🇦🇺 澳大利亚-自动,🇲🇾 马来西亚-自动,🗺 其他-自动,所有-手动,➡️ 直连,🚫 拒绝]}
 default_ad: &default_ad {type: select, proxies: [🚫 拒绝,➡️ 直连,默认节点]}
 default_gn: &default_gn {type: select, proxies: [➡️ 直连,默认节点]}
-default: &default {type: select, proxies: [默认节点,CF-手动,所有-自动,🇸🇬 新加坡-自动,🇯🇵 日本-自动,🇭🇰 香港-自动,🇨🇳 台湾-自动,🇰🇷 韩国-自动,🇺🇲 美国-自动,🗺 其他-自动,所有-手动,➡️ 直连,🚫 拒绝]}
+default: &default {type: select, proxies: [默认节点,CF-手动,所有-自动,🇸🇬 新加坡-自动,🇯🇵 日本-自动,🇭🇰 香港-自动,🇨🇳 台湾-自动,🇦🇺 澳大利亚-自动,🇲🇾 马来西亚-自动,🗺 其他-自动,所有-手动,➡️ 直连,🚫 拒绝]}
 
 proxy-groups:
   - {name: 默认节点, <<: *default_jd, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Rocket.png}
