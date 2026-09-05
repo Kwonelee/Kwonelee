@@ -92,7 +92,7 @@ proxy-groups:
   - {name: X, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/X.png}
   - {name: Netflix, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Netflix.png}
   - {name: TikTok, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/TikTok.png}
-  - {name: 🎬 Other Stream, <<: *default}
+  - {name: Streaming, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Streaming!CN.png}
   - {name: ⏱️ Test, <<: *default}
   - {name: 🌍 国外, <<: *default}
   - {name: ➡️ 国内, type: select, proxies: [➡️ 直连,默认节点]}
@@ -119,8 +119,8 @@ rules:
   - RULE-SET,X / Domain,X
   - RULE-SET,Netflix / Domain,Netflix
   - RULE-SET,TikTok / Domain,TikTok
-  - RULE-SET,Disney / Domain,🎬 Other Stream
-  - RULE-SET,PrimeVideo / Domain,🎬 Other Stream
+  - RULE-SET,Disney / Domain,Streaming
+  - RULE-SET,PrimeVideo / Domain,Streaming
   - RULE-SET,Google / IP,Google,no-resolve
   - RULE-SET,Telegram / IP,Telegram,no-resolve
   - RULE-SET,Netflix / IP,Netflix,no-resolve
