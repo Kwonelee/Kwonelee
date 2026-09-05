@@ -87,7 +87,7 @@ proxy-groups:
   - {name: AI, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/AI.png}
   - {name: GitHub, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/GitHub.png}
   - {name: YouTube, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/YouTube.png}
-  - {name: Google, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Google.png}
+  - {name: Google, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Google_Search.png}
   - {name: Telegram, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Telegram.png}
   - {name: X, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/X.png}
   - {name: Netflix, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Netflix.png}
