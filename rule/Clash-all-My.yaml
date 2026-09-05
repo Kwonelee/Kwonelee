@@ -96,7 +96,7 @@ proxy-groups:
   - {name: Streaming, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Streaming!CN.png}
   - {name: Test, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Speedtest.png}
   - {name: 国外, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Global.png}
-  - {name: ➡️ 国内, <<: *default_gn}
+  - {name: 国内, <<: *default_gn, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/CN.png}
   - {name: CF-手动, type: select, include-all: true, filter: "(?=.*(优选|CF|snippets|online)).*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Cloudflare.png}
   - {name: 其他-自动, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "^((?!(➡️ 直连|🚫 拒绝|优选|CF|snippets|online)).)*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/LinkCube.png}
   - {name: 其他-手动, type: select, include-all: true, filter: "^((?!(➡️ 直连|🚫 拒绝|优选|CF|snippets|online)).)*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Clubhouse.png}
@@ -129,7 +129,7 @@ rules:
   - RULE-SET,TEST / Domain,Test
   - RULE-SET,Proxy / Domain,国外
   - RULE-SET,Globe / Domain,国外
-  - MATCH,➡️ 国内
+  - MATCH,国内
 
 # ========================
 # 规则集提供者
