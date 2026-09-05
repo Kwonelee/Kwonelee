@@ -77,10 +77,10 @@ profile:
 # ========================
 # 策略组定义
 # ========================
-default_jd: &default_jd {type: select, proxies: [CF-手动,所有-自动,🇸🇬 新加坡-自动,🇯🇵 日本-自动,🇭🇰 香港-自动,🇨🇳 台湾-自动,🇦🇺 澳大利亚-自动,🇲🇾 马来西亚-自动,🗺 其他-自动,所有-手动,➡️ 直连,🚫 拒绝]}
+default_jd: &default_jd {type: select, proxies: [CF-手动,其他-自动,🇸🇬 新加坡-自动,🇯🇵 日本-自动,🇭🇰 香港-自动,🇨🇳 台湾-自动,🇦🇺 澳大利亚-自动,🇲🇾 马来西亚-自动,🗺 其他-自动,其他-手动,➡️ 直连,🚫 拒绝]}
 default_ad: &default_ad {type: select, proxies: [🚫 拒绝,➡️ 直连,默认节点]}
 default_gn: &default_gn {type: select, proxies: [➡️ 直连,默认节点]}
-default: &default {type: select, proxies: [默认节点,CF-手动,所有-自动,🇸🇬 新加坡-自动,🇯🇵 日本-自动,🇭🇰 香港-自动,🇨🇳 台湾-自动,🇦🇺 澳大利亚-自动,🇲🇾 马来西亚-自动,🗺 其他-自动,所有-手动,➡️ 直连,🚫 拒绝]}
+default: &default {type: select, proxies: [默认节点,CF-手动,其他-自动,🇸🇬 新加坡-自动,🇯🇵 日本-自动,🇭🇰 香港-自动,🇨🇳 台湾-自动,🇦🇺 澳大利亚-自动,🇲🇾 马来西亚-自动,🗺 其他-自动,其他-手动,➡️ 直连,🚫 拒绝]}
 
 proxy-groups:
   - {name: 默认节点, <<: *default_jd, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Rocket.png}
@@ -98,8 +98,8 @@ proxy-groups:
   - {name: 🌍 国外, <<: *default}
   - {name: ➡️ 国内, <<: *default_gn}
   - {name: CF-手动, type: select, include-all: true, filter: "(?=.*(优选|CF|snippets|online)).*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Cloudflare.png}
-  - {name: 所有-手动, type: select, include-all: true, filter: "^((?!(➡️ 直连|🚫 拒绝)).)*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Clubhouse.png}
-  - {name: 所有-自动, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "^((?!(➡️ 直连|🚫 拒绝|优选|CF|snippets|online)).)*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/LinkCube.png}
+  - {name: 其他-手动, type: select, include-all: true, filter: "^((?!(➡️ 直连|🚫 拒绝|优选|CF|snippets|online)).)*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Clubhouse.png}
+  - {name: 其他-自动, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "^((?!(➡️ 直连|🚫 拒绝|优选|CF|snippets|online)).)*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/LinkCube.png}
   - {name: 🇸🇬 新加坡-自动, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(坡|狮城|🇸🇬|(?<![A-Za-z])SG(?![A-Za-z])|Singapore|SGP)).*$"}
   - {name: 🇯🇵 日本-自动, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(日|🇯🇵|(?<![A-Za-z])JP(?![A-Za-z])|Japan|JPN)).*$"}
   - {name: 🇭🇰 香港-自动, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(港|🇭🇰|(?<![A-Za-z])HK(?![A-Za-z])|Hong|HKG)).*$"}
