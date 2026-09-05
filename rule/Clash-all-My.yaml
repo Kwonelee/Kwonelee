@@ -79,10 +79,11 @@ profile:
 # ========================
 default: &default {type: select, proxies: [默认节点,所有-自动,CF-手动,🇸🇬 新加坡-自动,🇯🇵 日本-自动,🇭🇰 香港-自动,🇨🇳 台湾-自动,🇰🇷 韩国-自动,🇺🇲 美国-自动,🗺 其他-自动,所有-手动,➡️ 直连,🚫 拒绝]}
 default_1: &default_1 {type: select, proxies: [所有-自动,CF-手动,🇸🇬 新加坡-自动,🇯🇵 日本-自动,🇭🇰 香港-自动,🇨🇳 台湾-自动,🇰🇷 韩国-自动,🇺🇲 美国-自动,🗺 其他-自动,所有-手动,➡️ 直连,🚫 拒绝]}
+default_ad: &default_ad {type: select, proxies: [🚫 拒绝,➡️ 直连,默认节点]}
 
 proxy-groups:
   - {name: 默认节点, <<: *default_1, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Rocket.png}
-  - {name: AD, type: select, proxies: [🚫 拒绝,➡️ 直连,默认节点], icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/AdBlack.png}
+  - {name: AD, <<: *default_ad, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/AdBlack.png}
   - {name: AI, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/AI.png}
   - {name: 📦 GitHub, <<: *default}
   - {name: YouTube, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/YouTube.png}
