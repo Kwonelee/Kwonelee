@@ -93,7 +93,7 @@ proxy-groups:
   - {name: Netflix, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Netflix.png}
   - {name: TikTok, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/TikTok.png}
   - {name: Streaming, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Streaming!CN.png}
-  - {name: ⏱️ Test, <<: *default}
+  - {name: Test, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Speedtest.png}
   - {name: 🌍 国外, <<: *default}
   - {name: ➡️ 国内, type: select, proxies: [➡️ 直连,默认节点]}
   - {name: CF-手动, type: select, include-all: true, filter: "(?=.*(优选|CF|snippets|online)).*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Cloudflare.png}
@@ -125,7 +125,7 @@ rules:
   - RULE-SET,Telegram / IP,Telegram,no-resolve
   - RULE-SET,Netflix / IP,Netflix,no-resolve
   - RULE-SET,AI / Domain,AI
-  - RULE-SET,TEST / Domain,⏱️ Test
+  - RULE-SET,TEST / Domain,Test
   - RULE-SET,Proxy / Domain,🌍 国外
   - RULE-SET,Globe / Domain,🌍 国外
   - MATCH,➡️ 国内
