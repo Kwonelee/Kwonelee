@@ -9,8 +9,8 @@ proxy-providers:
     type: http
     interval: 604800
     health-check:
-      enable: false
-      interval: 3600
+      enable: true
+      interval: 604800
       lazy: true
       url: https://www.gstatic.com/generate_204
     proxy: ➡️ 直连
