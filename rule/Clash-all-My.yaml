@@ -115,7 +115,7 @@ proxy-groups:
 rules:
   - RULE-SET,AD / Domain,AD
   - RULE-SET,GitHub / Domain,GitHub
-  - RULE-SET,Youtube / Domain,YouTube
+  - RULE-SET,YouTube / Domain,YouTube
   - RULE-SET,Google / Domain,Google
   - RULE-SET,Telegram / Domain,Telegram
   - RULE-SET,X / Domain,X
@@ -126,10 +126,10 @@ rules:
   - RULE-SET,Google / IP,Google,no-resolve
   - RULE-SET,Telegram / IP,Telegram,no-resolve
   - RULE-SET,Netflix / IP,Netflix,no-resolve
-  - RULE-SET,AI / Domain,AI
-  - RULE-SET,TEST / Domain,Test
-  - RULE-SET,Proxy / Domain,国外
-  - RULE-SET,Globe / Domain,国外
+  - RULE-SET,AI / Class,AI
+  - RULE-SET,Test / Class,Test
+  - RULE-SET,Proxy / Class,国外
+  - RULE-SET,Globe / Class,国外
   - MATCH,国内
 
 # ========================
@@ -142,9 +142,9 @@ rule-anchor:
 
 rule-providers:
   AD / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ads-all.mrs"}
-  AI / Domain: {<<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/Kwonelee/Kwonelee/refs/heads/main/list/AI.list"}
+  AI / Class: {<<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/Kwonelee/Kwonelee/refs/heads/main/list/AI.list"}
   GitHub / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/github.mrs"}
-  Youtube / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/youtube.mrs"}
+  YouTube / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/youtube.mrs"}
   Google / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs"}
   Telegram / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/telegram.mrs"} 
   X / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/x.mrs"}
@@ -152,9 +152,9 @@ rule-providers:
   TikTok / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/tiktok.mrs"}
   Disney / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/disney.mrs"}
   PrimeVideo / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/primevideo.mrs"}
-  Proxy / Domain: {<<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/Kwonelee/Kwonelee/refs/heads/main/list/Proxy.list"}
-  Globe / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global.list"}
-  TEST / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Check.list"}
+  Proxy / Class: {<<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/Kwonelee/Kwonelee/refs/heads/main/list/Proxy.list"}
+  Globe / Class: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global.list"}
+  Test / Class: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Check.list"}
   Google / IP: {<<: *ip, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   Telegram / IP: {<<: *ip, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/telegram.mrs"}
   Netflix / IP: {<<: *ip, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/netflix.mrs"}
