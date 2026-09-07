@@ -1,0 +1,355 @@
+# ==============================================================================
+#   M I H O M O   /   C L A S H   M E T A   A D V A N C E D   C O N F I G
+# ==============================================================================
+#   Profile     : Production Grade Modular Architecture
+#   Target Core : Mihomo (Clash.Meta) Kernel
+#   Features    : Dual-Provider | MRS Binary Rule-Sets | Smart Geo-Routing
+# ==============================================================================
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 🛠️  第一部分：YAML 锚点配置 (Anchors & Templates)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# ─── 1. 代理提供者模板 (Subscription Provider Template) ────────────────────────
+BaseProvider: &BaseProvider
+  type: http
+  interval: 86400                           # 自动更新间隔：24小时 (秒)
+  proxy: DIRECT                             # 更新订阅时使用的代理
+  health-check:
+    enable: true
+    url: 'https://www.google.com/generate_204'
+    interval: 300                           # 节点健康检查间隔：5分钟
+  # 正则过滤：自动剔除垃圾/通知/流量等信息节点
+  filter: '^(?!.*(群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))'
+
+# ─── 2. 策略组基础模板 (Policy Group Templates) ────────────────────────────────
+BaseFB: &BaseFB { type: fallback,     interval: 200, lazy: true, empty-fallback: REJECT, url: 'https://www.google.com/generate_204' }                               # 自动故障转移
+BaseCH: &BaseCH { type: load-balance, interval: 200, lazy: true, empty-fallback: REJECT, url: 'https://www.google.com/generate_204', strategy: consistent-hashing, hidden: true } # 负载均衡-一致性哈希
+BaseCR: &BaseCR { type: load-balance, interval: 200, lazy: true, empty-fallback: REJECT, url: 'https://www.google.com/generate_204', strategy: round-robin,        hidden: true } # 负载均衡-轮询模式
+BaseUT: &BaseUT { type: url-test,     interval: 200, lazy: true, empty-fallback: REJECT, url: 'https://www.google.com/generate_204', hidden: true }                       # 自动测速选择
+
+# ─── 3. 地区正则筛选 (Location RegEx Filters) ──────────────────────────────────
+FilterHK: &FilterHK '^(?=.*(?i)(港|🇭🇰|HK|Hong|HKG))(?!.*(排除1|排除2|5x)).*$'
+FilterSG: &FilterSG '^(?=.*(?i)(坡|🇸🇬|SG|Sing|SIN|XSP))(?!.*(排除1|排除2|5x)).*$'
+FilterJP: &FilterJP '^(?=.*(?i)(日|🇯🇵|JP|Japan|NRT|HND|KIX|CTS|FUK))(?!.*(排除1|排除2|5x)).*$'
+FilterKR: &FilterKR '^(?=.*(?i)(韩|🇰🇷|韓|首尔|南朝鲜|KR|KOR|Korea|South))(?!.*(排除1|排除2|5x)).*$'
+FilterUS: &FilterUS '^(?=.*(?i)(美|🇺🇸|US|USA|SJC|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD))(?!.*(排除1|排除2|5x)).*$'
+FilterTW: &FilterTW '^(?=.*(?i)(台|🇼🇸|🇹🇼|TW|tai|TPE|TSA|KHH))(?!.*(排除1|排除2|5x)).*$'
+FilterEU: &FilterEU '^(?=.*(?i)(奥|比|保|克罗地亚|塞|捷|丹|爱沙|芬|法|德|希|匈|爱尔|意|拉|立|卢|马其它|荷|波|葡|罗|斯洛伐|斯洛文|西|瑞|英|🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|🇬🇧|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU))(?!.*(排除1|排除2|5x)).*$'
+FilterOT: &FilterOT '^(?!.*(DIRECT|直接连接|美|港|坡|台|新|日|韩|奥|比|保|克罗地亚|塞|捷|丹|爱沙|芬|法|德|希|匈|爱尔|意|拉|立|卢|马其它|荷|波|葡|罗|斯洛伐|斯洛文|西|瑞|英|🇭🇰|🇼🇸|🇹🇼|🇸🇬|🇯🇵|🇰🇷|🇺🇸|🇬🇧|🇦🇹|🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|HK|TW|SG|JP|KR|US|GB|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU|HKG|TPE|TSA|KHH|SIN|XSP|NRT|HND|KIX|CTS|FUK|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD|LHR|LGW))'
+FilterAL: &FilterAL '^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))'
+
+# ─── 4. 节点优先级策略 (Proxy Priority Templates) ─────────────────────────────
+SelectFB: &SelectFB { type: select, proxies: [香港策略, 狮城策略, 日本策略, 韩国策略, 美国策略, 台湾策略, 欧盟策略, 冷门自选, 全球手动, 直接连接] }
+SelectPY: &SelectPY { type: select, proxies: [默认代理, 香港策略, 狮城策略, 日本策略, 韩国策略, 美国策略, 台湾策略, 欧盟策略, 冷门自选, 全球手动, 直接连接] }
+SelectDC: &SelectDC { type: select, proxies: [直接连接, 默认代理, 香港策略, 狮城策略, 日本策略, 韩国策略, 美国策略, 台湾策略, 欧盟策略, 冷门自选, 全球手动] }
+SelectHK: &SelectHK { type: select, proxies: [香港策略, 默认代理, 狮城策略, 日本策略, 韩国策略, 美国策略, 台湾策略, 欧盟策略, 冷门自选, 全球手动, 直接连接] }
+SelectSG: &SelectSG { type: select, proxies: [狮城策略, 默认代理, 香港策略, 日本策略, 韩国策略, 美国策略, 台湾策略, 欧盟策略, 冷门自选, 全球手动, 直接连接] }
+SelectUS: &SelectUS { type: select, proxies: [美国策略, 默认代理, 香港策略, 狮城策略, 日本策略, 韩国策略, 台湾策略, 欧盟策略, 冷门自选, 全球手动, 直接连接] }
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 📡  第二部分：订阅提供者 (Proxy Providers)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+proxy-providers:
+  # 优质主用订阅
+  优质服务商:
+    <<: *BaseProvider
+    url: '优质订阅源地址'
+    override:
+      additional-prefix: '[优] '            # 统一加入节点前缀
+
+  # 备用补充订阅
+  备用服务商:
+    <<: *BaseProvider
+    url: '备用订阅源地址'
+    override:
+      additional-prefix: '[备] '            # 统一加入节点前缀
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# ⚙️  第三部分：核心与系统参数 (Core Settings)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# ─── 1. 网络与运行模式 ────────────────────────────────────────────────────────
+mode: rule                                  # 路由模式 (rule/global/direct)
+port: 7890                                  # HTTP(S) 代理端口
+socks-port: 7891                            # SOCKS5 代理端口
+redir-port: 7892                            # 透明代理端口 (Linux/macOS)
+mixed-port: 7893                            # 混合代理端口 (HTTP & SOCKS5)
+tproxy-port: 7895                           # TProxy 端口 (Linux)
+ipv6: true                                  # 开启 IPv6 支持
+allow-lan: false                            # 允许局域网设备连接
+bind-address: '*'                           # 监听网卡接口
+unified-delay: true                         # 统一延迟计算 (消除 TCP 握手损耗)
+tcp-concurrent: true                        # TCP 并发连接 (自动匹配最佳节点)
+log-level: warning                          # 日志级别 (info/warning/error/silent)
+find-process-mode: 'always'                 # 进程匹配模式 (always/strict/off)
+keep-alive-interval: 15                     # 心跳检测间隔 (秒)
+keep-alive-idle: 600                        # TCP 空闲超时 (秒)
+
+# ─── 2. API 与身份鉴权 ────────────────────────────────────────────────────────
+authentication:
+  - mihomo:yyds666                          # 连接鉴权账号密码
+skip-auth-prefixes:
+  - 127.0.0.1/8                             # 免认证本机 IPv4 段
+  - ::1/128                                 # 免认证本机 IPv6 段
+
+# ─── 3. 实验性参数 ───────────────────────────────────────────────────────────
+experimental:
+  quic-go-disable-gso: true                 # 禁用 QUIC GSO 提高兼容性
+
+# ─── 4. 控制面板与 Web API ────────────────────────────────────────────────────
+external-controller: 127.0.0.1:9090        # RESTful API 监听地址
+secret: yyds666                            # API 密钥
+external-ui: ui                            # 控制面板文件目录
+external-ui-name: zashboard                # Dashboard 界面类型
+external-ui-url: https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip
+
+# ─── 5. 状态持久化存储 ────────────────────────────────────────────────────────
+profile:
+  store-selected: true                      # 记住上次选中的策略节点
+  store-fake-ip: true                       # 持久化 Fake-IP 缓存映射
+
+# ─── 6. 流量嗅探 (Sniffer) ────────────────────────────────────────────────────
+sniffer:
+  enable: true                              # 开启域名嗅探 (解决 TLS/QUIC 连接重定向)
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  skip-domain:
+    - "Mijia Cloud"
+    - "+.push.apple.com"
+
+# ─── 7. TUN 虚拟网卡设置 ──────────────────────────────────────────────────────
+tun:
+  enable: false                             # TUN 模式开关
+  stack: mixed                              # 协议栈 (system/gvisor/mixed)
+  dns-hijack:
+    - "any:53"
+    - "tcp://any:53"
+  auto-route: true                          # 自动配置路由表
+  auto-redirect: true                       # 自动转发系统流量
+  auto-detect-interface: true              # 自动检测网络出口
+
+# ─── 8. 高级 DNS 解析器 ───────────────────────────────────────────────────────
+dns:
+  enable: true                              # 内置 DNS 引擎开关
+  ipv6: true                                # 启用 DNS IPv6 解析
+  enhanced-mode: fake-ip                    # 解析增强模式 (fake-ip/redir-host)
+  fake-ip-range: 198.18.0.1/16              # Fake-IP 网段范围
+  
+  # 上游直连基础 DNS
+  default-nameserver:
+    - 119.29.29.29                          # DNSPod
+    - 180.184.1.1                           # ByteDance DNS
+    - 223.5.5.5                             # AliDNS
+    
+  # 主要 DoH 解析服务器
+  nameserver:
+    - https://dns.alidns.com/dns-query     # Ali DoH
+    - https://doh.pub/dns-query             # DNSPod DoH
+    
+  # 直连与响应绕过 Fake-IP 列表
+  fake-ip-filter:
+    - rule-set:Direct
+    - rule-set:Private
+    - rule-set:China
+    - +.miwifi.com
+    - +.docker.io
+    - +.market.xiaomi.com
+    - +.push.apple.com
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 🔀  第四部分：策略组配置 (Proxy Groups)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+proxy-groups:
+  # ─── 核心路由主组 ───
+  - { name: 默认代理,     <<: *SelectFB, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Static.png }
+  - { name: 国外流量,     <<: *SelectPY, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png }
+  - { name: 国内流量,     <<: *SelectDC, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/China.png }
+  - { name: 兜底流量,     <<: *SelectPY, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Final.png }
+  - { name: 直接连接,     type: select, proxies: [DIRECT], hidden: true, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Direct.png }
+
+  # ─── 功能与辅助组 ───
+  - { name: 网络测试,     <<: *SelectPY, include-all: true, filter: *FilterAL, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Speedtest.png }
+  - { name: 抖快书定位,   type: select, proxies: [直接连接, 香港策略, 台湾策略, 狮城策略, 日本策略, 韩国策略, 美国策略, 欧盟策略], icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Null_Nation.png }
+
+  # ─── 流媒体与影音服务 ───
+  - { name: Emby服,      <<: *SelectPY, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Emby.png }
+  - { name: 油管视频,     <<: *SelectPY, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/YouTube.png }
+  - { name: 奈飞视频,     <<: *SelectPY, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Netflix.png }
+  - { name: 国际媒体,     <<: *SelectPY, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/DomesticMedia.png }
+  - { name: 新闻媒体,     <<: *SelectUS, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Apple_News.png }
+
+  # ─── 社交与通讯应用 ───
+  - { name: 电报消息,     <<: *SelectPY, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Telegram_X.png }
+  - { name: 推特社交,     <<: *SelectPY, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/X.png }
+  - { name: 社交平台,     <<: *SelectPY, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/PBS.png }
+
+  # ─── AI / 科技与平台服务 ───
+  - { name: 人工智能,     <<: *SelectUS, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/AI.png }
+  - { name: 货币平台,     <<: *SelectSG, icon: https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/Bitcloud.png }
+  - { name: 游戏平台,     <<: *SelectPY, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Game.png }
+  - { name: 微软服务,     <<: *SelectPY, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Microsoft.png }
+  - { name: 谷歌服务,     <<: *SelectPY, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Google_Search.png }
+  - { name: 苹果服务,     <<: *SelectPY, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Apple.png }
+
+  # ─── 地区选点策略组 ───
+  - { name: 香港策略,     type: select, proxies: [香港自动, 香港均衡-散列, 香港均衡-轮询], include-all: true, filter: *FilterHK, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Hong_Kong.png }
+  - { name: 台湾策略,     type: select, proxies: [台湾自动, 台湾均衡-散列, 台湾均衡-轮询], include-all: true, filter: *FilterTW, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Taiwan.png }
+  - { name: 狮城策略,     type: select, proxies: [狮城自动, 狮城均衡-散列, 狮城均衡-轮询], include-all: true, filter: *FilterSG, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Singapore.png }
+  - { name: 日本策略,     type: select, proxies: [日本自动, 日本均衡-散列, 日本均衡-轮询], include-all: true, filter: *FilterJP, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Japan.png }
+  - { name: 韩国策略,     type: select, proxies: [韩国自动, 韩国均衡-散列, 韩国均衡-轮询], include-all: true, filter: *FilterKR, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Korea.png }
+  - { name: 美国策略,     type: select, proxies: [美国自动, 美国均衡-散列, 美国均衡-轮询], include-all: true, filter: *FilterUS, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/United_States.png }
+  - { name: 欧盟策略,     type: select, proxies: [欧盟自动, 欧盟均衡-散列, 欧盟均衡-轮询], include-all: true, filter: *FilterEU, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/European_Union.png }
+
+  # ─── 全节点与冷门自选 ───
+  - { name: 冷门自选,     type: select, include-all: true, filter: *FilterOT, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Europe_Map.png }
+  - { name: 全球手动,     type: select, include-all: true, filter: *FilterAL, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Clubhouse.png }
+
+  # ─── 自动测速选择组 ───
+  - { name: 香港自动,     <<: *BaseUT, include-all: true, filter: *FilterHK, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png }
+  - { name: 台湾自动,     <<: *BaseUT, include-all: true, filter: *FilterTW, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png }
+  - { name: 狮城自动,     <<: *BaseUT, include-all: true, filter: *FilterSG, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png }
+  - { name: 日本自动,     <<: *BaseUT, include-all: true, filter: *FilterJP, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png }
+  - { name: 韩国自动,     <<: *BaseUT, include-all: true, filter: *FilterKR, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png }
+  - { name: 美国自动,     <<: *BaseUT, include-all: true, filter: *FilterUS, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png }
+  - { name: 欧盟自动,     <<: *BaseUT, include-all: true, filter: *FilterEU, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png }
+
+  # ─── 负载均衡 (一致性哈希) ───
+  - { name: 香港均衡-散列, <<: *BaseCH, include-all: true, filter: *FilterHK, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png }
+  - { name: 台湾均衡-散列, <<: *BaseCH, include-all: true, filter: *FilterTW, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png }
+  - { name: 狮城均衡-散列, <<: *BaseCH, include-all: true, filter: *FilterSG, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png }
+  - { name: 日本均衡-散列, <<: *BaseCH, include-all: true, filter: *FilterJP, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png }
+  - { name: 韩国均衡-散列, <<: *BaseCH, include-all: true, filter: *FilterKR, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png }
+  - { name: 美国均衡-散列, <<: *BaseCH, include-all: true, filter: *FilterUS, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png }
+  - { name: 欧盟均衡-散列, <<: *BaseCH, include-all: true, filter: *FilterEU, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png }
+
+  # ─── 负载均衡 (轮询模式) ───
+  - { name: 香港均衡-轮询, <<: *BaseCR, include-all: true, filter: *FilterHK, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin.png }
+  - { name: 台湾均衡-轮询, <<: *BaseCR, include-all: true, filter: *FilterTW, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin.png }
+  - { name: 狮城均衡-轮询, <<: *BaseCR, include-all: true, filter: *FilterSG, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin.png }
+  - { name: 日本均衡-轮询, <<: *BaseCR, include-all: true, filter: *FilterJP, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin.png }
+  - { name: 韩国均衡-轮询, <<: *BaseCR, include-all: true, filter: *FilterKR, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin.png }
+  - { name: 美国均衡-轮询, <<: *BaseCR, include-all: true, filter: *FilterUS, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin.png }
+  - { name: 欧盟均衡-轮询, <<: *BaseCR, include-all: true, filter: *FilterEU, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin.png }
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 🛣️  第五部分：分流路由规则 (Routing Rules)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+rules: 
+  # ⛔ 广告与恶意追踪拦截
+  - RULE-SET,Tracking,REJECT
+  - RULE-SET,Advertising,REJECT
+  
+  # 🌐 域名 / 应用匹配规则 (顺序自上而下匹配)
+  - RULE-SET,LocationDKS,抖快书定位
+  - RULE-SET,Private,直接连接
+  - RULE-SET,Direct,直接连接
+  - RULE-SET,XPTV,直接连接
+  - RULE-SET,Download,直接连接
+  - RULE-SET,AppleCN,直接连接
+  - RULE-SET,AI,人工智能
+  - DOMAIN-KEYWORD,speedtest,网络测试
+  - RULE-SET,Speedtest,网络测试
+  - RULE-SET,Twitter,推特社交
+  - RULE-SET,Telegram,电报消息
+  - RULE-SET,SocialMedia,社交平台
+  - RULE-SET,NewsMedia,新闻媒体
+  - RULE-SET,Games,游戏平台
+  - RULE-SET,Crypto,货币平台
+  - RULE-SET,Emby,Emby服
+  - RULE-SET,Netflix,奈飞视频
+  - RULE-SET,YouTube,油管视频
+  - RULE-SET,Streaming,国际媒体
+  - RULE-SET,Apple,苹果服务 
+  - RULE-SET,Google,谷歌服务
+  - RULE-SET,Microsoft,微软服务
+  - RULE-SET,Proxy,国外流量
+  - RULE-SET,China,国内流量
+
+  # 📍 IP 段匹配规则 (no-resolve 避免触发提前 DNS 解析)
+  - RULE-SET,AdvertisingIP,REJECT,no-resolve
+  - RULE-SET,PrivateIP,直接连接,no-resolve
+  - RULE-SET,XPTVIP,直接连接,no-resolve
+  - RULE-SET,AIIP,人工智能,no-resolve
+  - RULE-SET,TelegramIP,电报消息,no-resolve
+  - RULE-SET,SocialMediaIP,社交平台,no-resolve
+  - RULE-SET,EmbyIP,Emby服,no-resolve
+  - RULE-SET,NetflixIP,奈飞视频,no-resolve
+  - RULE-SET,StreamingIP,国际媒体,no-resolve
+  - RULE-SET,GoogleIP,谷歌服务,no-resolve
+  - RULE-SET,ProxyIP,国外流量,no-resolve
+  - RULE-SET,ChinaIP,国内流量,no-resolve
+
+  # 🐟 未匹配流量最终兜底
+  - MATCH,兜底流量
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 📦  第六部分：规则集订阅源 (Rule Providers)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# MRS 高效二进制规则集模板
+BehaviorDN: &BehaviorDN { type: http, behavior: domain, format: mrs, interval: 86400 }
+BehaviorIP: &BehaviorIP { type: http, behavior: ipcidr, format: mrs, interval: 86400 }
+
+rule-providers:  
+  # ─── Domain 域名规则集 ───
+  Tracking:       { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Tracking.mrs }
+  Advertising:    { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Advertising.mrs } 
+  Direct:         { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Direct.mrs }
+  LocationDKS:    { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/LocationDKS.mrs }
+  Private:        { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Private.mrs }
+  Download:       { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Download.mrs }
+  Speedtest:      { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Speedtest.mrs }
+  AI:             { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/AI.mrs }  
+  Telegram:       { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Telegram.mrs }
+  Twitter:        { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Twitter.mrs }  
+  SocialMedia:    { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/SocialMedia.mrs }
+  NewsMedia:      { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/NewsMedia.mrs }
+  Games:          { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Games.mrs }
+  Crypto:         { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Crypto.mrs }
+  Netflix:        { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Netflix.mrs }
+  YouTube:        { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/YouTube.mrs }
+  XPTV:           { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/XPTV.mrs }  
+  Emby:           { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Emby.mrs }
+  Streaming:      { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Streaming.mrs }  
+  AppleCN:        { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/AppleCN.mrs }
+  Apple:          { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Apple.mrs }
+  Google:         { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Google.mrs }
+  Microsoft:      { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Microsoft.mrs }  
+  Facebook:       { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Facebook.mrs }
+  Proxy:          { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Proxy.mrs }
+  China:          { <<: *BehaviorDN, url: https://github.com/666OS/rules/raw/release/mihomo/domain/China.mrs }
+
+  # ─── IP-CIDR 网段规则集 ───
+  AdvertisingIP:  { <<: *BehaviorIP, url: https://github.com/666OS/rules/raw/release/mihomo/ip/Advertising.mrs }
+  PrivateIP:      { <<: *BehaviorIP, url: https://github.com/666OS/rules/raw/release/mihomo/ip/Private.mrs }
+  AIIP:           { <<: *BehaviorIP, url: https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs }
+  TelegramIP:     { <<: *BehaviorIP, url: https://github.com/666OS/rules/raw/release/mihomo/ip/Telegram.mrs }  
+  SocialMediaIP:  { <<: *BehaviorIP, url: https://github.com/666OS/rules/raw/release/mihomo/ip/SocialMedia.mrs }  
+  XPTVIP:         { <<: *BehaviorIP, url: https://github.com/666OS/rules/raw/release/mihomo/ip/XPTV.mrs }
+  EmbyIP:         { <<: *BehaviorIP, url: https://github.com/666OS/rules/raw/release/mihomo/ip/Emby.mrs }
+  NetflixIP:      { <<: *BehaviorIP, url: https://github.com/666OS/rules/raw/release/mihomo/ip/Netflix.mrs }
+  StreamingIP:    { <<: *BehaviorIP, url: https://github.com/666OS/rules/raw/release/mihomo/ip/Streaming.mrs }  
+  GoogleIP:       { <<: *BehaviorIP, url: https://github.com/666OS/rules/raw/release/mihomo/ip/Google.mrs }
+  FacebookIP:     { <<: *BehaviorIP, url: https://github.com/666OS/rules/raw/release/mihomo/ip/Facebook.mrs }  
+  ProxyIP:        { <<: *BehaviorIP, url: https://github.com/666OS/rules/raw/release/mihomo/ip/Proxy.mrs } 
+  ChinaIP:        { <<: *BehaviorIP, url: https://github.com/666OS/rules/raw/release/mihomo/ip/China.mrs }
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#                               END OF FILE
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
