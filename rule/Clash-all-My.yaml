@@ -23,18 +23,30 @@ proxies:
   - {name: 🚫 拒绝, type: reject}
 
 # ========================
-# 主要端口设置
+# 网络与运行模式
 # ========================
-port: 7890
-socks-port: 7891
-redir-port: 7892
-mixed-port: 7893
-tproxy-port: 7895
+mode: rule                                  # 路由模式 (rule/global/direct)
+port: 7890                                  # HTTP(S) 代理端口
+socks-port: 7891                            # SOCKS5 代理端口
+redir-port: 7892                            # 透明代理端口 (Linux/macOS)
+mixed-port: 7893                            # 混合代理端口 (HTTP & SOCKS5)
+tproxy-port: 7895                           # TProxy 端口 (Linux)
+ipv6: true                                  # 开启 IPv6 支持
+allow-lan: true                             # 允许局域网设备连接
+bind-address: '*'                           # 监听网卡接口
+unified-delay: true                         # 统一延迟计算 (消除 TCP 握手损耗)
+tcp-concurrent: true                        # TCP 并发连接 (自动匹配最佳节点)
+log-level: warning                          # 日志级别 (info/warning/error/silent)
+find-process-mode: 'always'                 # 进程匹配模式 (always/strict/off)
+keep-alive-interval: 15                     # 心跳检测间隔 (秒)
+keep-alive-idle: 600                        # TCP 空闲超时 (秒)
+# 实验性参数
+experimental:
+  quic-go-disable-gso: true                 # 禁用 QUIC GSO 提高兼容性
 
-allow-lan: true
-mode: rule
-log-level: info
-
+# ========================
+# 控制面板
+# ========================
 external-controller: 0.0.0.0:9090
 external-ui: /usr/share/openclash/ui
 external-ui-name: zashboard
@@ -42,40 +54,69 @@ external-ui-url: https://gh-proxy.com/github.com/Zephyruso/zashboard/archive/ref
 secret: "123456"
 
 # ========================
+# 状态持久化存储
+# ========================
+profile:
+  store-selected: true                      # 记住上次选中的策略节点
+  store-fake-ip: true                       # 持久化 Fake-IP 缓存映射
+
+# ========================
+# 流量嗅探
+# ========================
+sniffer:
+  enable: true                              # 开启域名嗅探 (解决 TLS/QUIC 连接重定向)
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  skip-domain:
+    - "Mijia Cloud"
+    - "+.push.apple.com"
+
+# ========================
 # DNS 设置
 # ========================
 dns:
-  enable: true
-  listen: 0.0.0.0:7874
-  ipv6: true
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.20.0.1/16
+  enable: true                              # 内置 DNS 引擎开关
+  ipv6: true                                # 启用 DNS IPv6 解析
+  enhanced-mode: fake-ip                    # 解析增强模式 (fake-ip/redir-host)
+  fake-ip-range: 198.18.0.1/16              # Fake-IP 网段范围
+  # 上游直连基础 DNS
+  default-nameserver:
+    - 119.29.29.29                          # DNSPod
+    - 180.184.1.1                           # ByteDance DNS
+    - 223.5.5.5                             # AliDNS
+  # 主要 DoH 解析服务器
   nameserver:
-    - 223.5.5.5
+    - https://dns.alidns.com/dns-query      # Ali DoH
+    - https://doh.pub/dns-query             # DNSPod DoH
+  # 直连与响应绕过 Fake-IP 列表
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
     - +.lan
     - +.local
     - geosite:cn
-
-ipv6: true
+    - +.miwifi.com
+    - +.docker.io
+    - +.market.xiaomi.com
+    - +.push.apple.com
 
 # ========================
 # TUN 模块
 # ========================
 tun:
-  enable: true
-  stack: gvisor
-  device: utun
-  endpoint-independent-nat: true
-  auto-route: false
-  auto-detect-interface: false
-  auto-redirect: false
-  strict-route: false
-
-profile:
-  store-selected: true
-  store-fake-ip: true
+  enable: false                             # TUN 模式开关
+  stack: mixed                              # 协议栈 (system/gvisor/mixed)
+  dns-hijack:
+    - "any:53"
+    - "tcp://any:53"
+  auto-route: true                          # 自动配置路由表
+  auto-redirect: true                       # 自动转发系统流量
+  auto-detect-interface: true               # 自动检测网络出口
 
 # ========================
 # 策略组定义
