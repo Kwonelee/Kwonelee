@@ -5,7 +5,7 @@
 proxy-providers:
 
   CF优选:
-    url: "XXXXXX"
+    url: 'XXXXXX'
     type: http
     interval: 604800
     health-check:
@@ -13,6 +13,8 @@ proxy-providers:
       interval: 86400
       lazy: true
       url: https://www.gstatic.com/generate_204
+    override:
+      additional-prefix: '本地 '
     proxy: ➡️ 直连
 
 # 节点信息
@@ -99,9 +101,9 @@ proxy-groups:
   - {name: Test, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Speedtest.png}
   - {name: 国外, <<: *default, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Global.png}
   - {name: 国内, <<: *default_gn, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/CN.png}
-  - {name: CF-手动, type: select, include-all: true, filter: "(?=.*(优选|CF|snippets|online)).*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Cloudflare.png}
-  - {name: 其他-自动, <<: *default_urltest, filter: "^((?!(➡️ 直连|🚫 拒绝|优选|CF|snippets|online)).)*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/LinkCube.png}
-  - {name: 其他-手动, type: select, include-all: true, filter: "^((?!(➡️ 直连|🚫 拒绝|优选|CF|snippets|online)).)*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Clubhouse.png}
+  - {name: CF-手动, type: select, include-all: true, filter: "(?=.*(本地|CF)).*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Cloudflare.png}
+  - {name: 其他-自动, <<: *default_urltest, filter: "^((?!(➡️ 直连|🚫 拒绝|本地|CF)).)*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/LinkCube.png}
+  - {name: 其他-手动, type: select, include-all: true, filter: "^((?!(➡️ 直连|🚫 拒绝|本地|CF)).)*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Clubhouse.png}
   - {name: 🇸🇬 新加坡-自动, <<: *default_urltest, filter: "(?=.*(坡|狮城|🇸🇬|(?<![A-Za-z])SG(?![A-Za-z])|Singapore|SGP)).*$"}
   - {name: 🇯🇵 日本-自动, <<: *default_urltest, filter: "(?=.*(日|🇯🇵|(?<![A-Za-z])JP(?![A-Za-z])|Japan|JPN)).*$"}
   - {name: 🇭🇰 香港-自动, <<: *default_urltest, filter: "(?=.*(港|🇭🇰|(?<![A-Za-z])HK(?![A-Za-z])|Hong|HKG)).*$"}
