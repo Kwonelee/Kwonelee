@@ -1,21 +1,18 @@
 # ========================
-# Clash-ALL
+# 锚点 start
 # ========================
-# 订阅信息
-proxy-providers:
+# 策略组
+pr: &pr {type: select, proxies: [默认节点,CF-手动,其他-自动,🇸🇬 新加坡-自动,🇯🇵 日本-自动,🇭🇰 香港-自动,🇨🇳 台湾-自动,🇲🇾 马来西亚-自动,🗺 其他国家-自动,其他-手动,➡️ 直连,🚫 拒绝]}
+#订阅更新和延迟测试
+p: &p {type: http, interval: 604800, proxy: ➡️ 直连, health-check: {enable: true, url: "https://www.gstatic.com/generate_204", interval: 86400}}
 
+# url 里填写自己的订阅,名称不能重复
+proxy-providers:
   CF优选:
-    url: 'XXXXXX'
-    type: http
-    interval: 604800
-    health-check:
-      enable: true
-      interval: 86400
-      lazy: true
-      url: https://www.gstatic.com/generate_204
+    <<: *p
+    url: "XXX"
     override:
       additional-prefix: '本地 '
-    proxy: ➡️ 直连
 
 # 节点信息
 proxies:
