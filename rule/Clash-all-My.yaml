@@ -4,6 +4,8 @@
 # 策略组
 pr: &pr {type: select, proxies: [默认节点,CF-手动,其他-自动,🇸🇬 新加坡-自动,🇯🇵 日本-自动,🇭🇰 香港-自动,🇨🇳 台湾-自动,🇲🇾 马来西亚-自动,🗺 其他国家-自动,其他-手动,➡️ 直连,🚫 拒绝]}
 pr_urltest: &pr_urltest {type: url-test, include-all: true, empty-fallback: "🚫 拒绝", url: "https://www.gstatic.com/generate_204"}
+pr_ad: &pr_ad {type: select, proxies: [🚫 拒绝,➡️ 直连,默认节点]}
+pr_gn: &pr_gn {type: select, proxies: [➡️ 直连,默认节点]}
 #订阅更新与延迟测试
 p: &p {type: http, interval: 604800, proxy: ➡️ 直连, health-check: {enable: true, url: "https://www.gstatic.com/generate_204", interval: 86400}}
 
@@ -119,9 +121,6 @@ tun:
 # ========================
 # 策略组定义
 # ========================
-pr_ad: &pr_ad {type: select, proxies: [🚫 拒绝,➡️ 直连,默认节点]}
-pr_gn: &pr_gn {type: select, proxies: [➡️ 直连,默认节点]}
-
 proxy-groups:
   - {name: 默认节点, type: select, proxies: [CF-手动,其他-自动,🇸🇬 新加坡-自动,🇯🇵 日本-自动,🇭🇰 香港-自动,🇨🇳 台湾-自动,🇲🇾 马来西亚-自动,🗺 其他国家-自动,其他-手动,➡️ 直连,🚫 拒绝], icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Rocket.png}
   - {name: AD, <<: *pr_ad, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/AdBlack.png}
