@@ -137,7 +137,6 @@ proxy-groups:
   - {name: Test, <<: *pr, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Speedtest.png}
   - {name: 国外, <<: *pr, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Global.png}
   - {name: 国内, <<: *pr_gn, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/CN.png}
-
   - {name: CF-手动, type: select, include-all: true, filter: "(?=.*(本地|CF)).*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Cloudflare.png}
   - {name: 其他-自动, <<: *pr_urltest, filter: "^((?!(➡️ 直连|🚫 拒绝|本地|CF)).)*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/LinkCube.png}
   - {name: 其他-手动, type: select, include-all: true, filter: "^((?!(➡️ 直连|🚫 拒绝|本地|CF)).)*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Clubhouse.png}
