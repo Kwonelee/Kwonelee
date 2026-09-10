@@ -96,7 +96,7 @@ dns:
   # 直连与响应绕过 Fake-IP 列表
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
-    - rule-set:oc-cn-domain
+    - rule-set:oc-cn-domain                 # 目前oc会自动添加
     - +.miwifi.com
     - +.docker.io
     - +.market.xiaomi.com
