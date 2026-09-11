@@ -105,6 +105,11 @@ config openclash 'config'
 	option custom_fakeip_filter_mode 'blacklist'
 	option enable_tcp_concurrent '1'
 	option enable_unified_delay '1'
+	option config_path '/etc/openclash/config/Clash-all-My.yaml'
+	option core_type 'Meta'
+	option dnsmasq_resolvfile '/tmp/resolv.conf.d/resolv.conf.auto'
+	option dnsmasq_noresolv '0'
+	option default_dashboard 'zashboard'
 
 config config_overwrite
 	option name 'default'
