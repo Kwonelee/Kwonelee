@@ -16,6 +16,10 @@ proxy-providers:
     override:
       additional-prefix: '本地 '
 
+  Mia公益:
+    <<: *p
+    url: "XXX"
+
 # 节点信息，可自定义节点
 proxies:
   - {name: ➡️ 直连, type: direct, udp: true}
