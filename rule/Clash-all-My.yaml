@@ -141,12 +141,12 @@ proxy-groups:
   - {name: 其他-自动, <<: *pr_ut, filter: "^((?!(➡️ 直连|🚫 拒绝|本地|CF)).)*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/LinkCube.png}
   - {name: 其他-手动, type: select, include-all: true, filter: "^((?!(➡️ 直连|🚫 拒绝|本地|CF)).)*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Clubhouse.png}
 
-  - {name: 🇸🇬 新加坡-自动, <<: *pr_ut, filter: "(?=.*(坡|狮城|🇸🇬|(?<![A-Za-z])SG(?![A-Za-z])|Singapore|SGP)).*$"}
-  - {name: 🇯🇵 日本-自动, <<: *pr_ut, filter: "(?=.*(日|🇯🇵|(?<![A-Za-z])JP(?![A-Za-z])|Japan|JPN)).*$"}
-  - {name: 🇭🇰 香港-自动, <<: *pr_ut, filter: "(?=.*(港|🇭🇰|(?<![A-Za-z])HK(?![A-Za-z])|Hong|HKG)).*$"}
-  - {name: 🇨🇳 台湾-自动, <<: *pr_ut, filter: "(?=.*(台|🇹🇼|(?<![A-Za-z])TW(?![A-Za-z])|tai|TPE)).*$"}
-  - {name: 🇲🇾 马来西亚-自动, <<: *pr_ut, filter: "(?=.*(马来西亚|🇲🇾|(?<![A-Za-z])MY(?![A-Za-z])|Malaysia|MYS)).*$"}
-  - {name: 🗺 其他国家-自动, <<: *pr_ut, filter: "^((?!(➡️ 直连|🚫 拒绝|坡|狮城|🇸🇬|(?<![A-Za-z])SG(?![A-Za-z])|Singapore|SGP|日|🇯🇵|(?<![A-Za-z])JP(?![A-Za-z])|Japan|JPN|港|🇭🇰|(?<![A-Za-z])HK(?![A-Za-z])|Hong|HKG|台|🇹🇼|(?<![A-Za-z])TW(?![A-Za-z])|tai|TPE|马来西亚|🇲🇾|(?<![A-Za-z])MY(?![A-Za-z])|Malaysia|MYS)).)*$"}
+  - {name: 🇸🇬 新加坡-自动, <<: *pr_ut, filter: "(?=.*(广新|新加坡|SG|坡|狮城|🇸🇬|Singapore)).*$"}
+  - {name: 🇯🇵 日本-自动, <<: *pr_ut, filter: "(?=.*(广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan)).*$"}
+  - {name: 🇭🇰 香港-自动, <<: *pr_ut, filter: "(?=.*(广港|香港|HK|Hong Kong|🇭🇰|HongKong)).*$"}
+  - {name: 🇨🇳 台湾-自动, <<: *pr_ut, filter: "(?=.*(广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan)).*$"}
+  - {name: 🇲🇾 马来西亚-自动, <<: *pr_ut, filter: "(?=.*(马来西亚|MY|🇲🇾|Malaysia|MYS)).*$"}
+  - {name: 🗺 其他国家-自动, <<: *pr_ut, filter: "^((?!(➡️ 直连|🚫 拒绝|广新|新加坡|SG|坡|狮城|🇸🇬|Singapore|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan|广港|香港|HK|Hong Kong|🇭🇰|HongKong|广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan|马来西亚|MY|🇲🇾|Malaysia|MYS)).)*$"}
 
 # ========================
 # 规则引擎（rules）
