@@ -19,6 +19,8 @@ proxy-providers:
   Mia公益:
     <<: *p
     url: "XXX"
+    override:
+      additional-prefix: '公益 '
 
 # 节点信息，可自定义节点
 proxies:
