@@ -12,13 +12,13 @@ URL: &URL {type: url-test, include-all: true, tolerance: 50, interval: 300, lazy
 # url里填写订阅,名称不能重复
 proxy-providers:
   CF优选:
-    <<: *p
+    <<: *P
     url: "XXX"
     override:
       additional-prefix: '本地 '
 
   Mia公益:
-    <<: *p
+    <<: *P
     url: "XXX"
     override:
       additional-prefix: '公益 '
