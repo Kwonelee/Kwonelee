@@ -5,7 +5,7 @@ pr_ut: &pr_ut {type: url-test, include-all: true, empty-fallback: "🚫 拒绝",
 pr_ad: &pr_ad {type: select, proxies: [🚫 拒绝,➡️ 直连,默认节点]}
 pr_gn: &pr_gn {type: select, proxies: [➡️ 直连,默认节点]}
 #订阅更新与延迟测试
-p: &p {type: http, interval: 604800, proxy: ➡️ 直连, health-check: {enable: true, url: "https://www.gstatic.com/generate_204", interval: 86400}}
+p: &p {type: http, interval: 604800, proxy: ➡️ 直连, health-check: {enable: true, url: "https://www.gstatic.com/generate_204", interval: 0}}
 ######### 锚点 end #######
 
 # url里填写订阅,名称不能重复
