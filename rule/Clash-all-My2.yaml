@@ -23,7 +23,7 @@ rule-anchor:
   domain_text: &domain_text {type: http, interval: 86400, behavior: domain, format: text}
 
 proxy-providers:
-  HH: {<<: *P, url: "订阅URL"}
+  CF优选: {<<: *P, url: "订阅URL"}
 
 proxies:
   - {name: 直连, type: direct, udp: true}
