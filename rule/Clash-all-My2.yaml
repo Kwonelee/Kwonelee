@@ -3,7 +3,6 @@ rule-anchor:
   # 节点选择
   G1: &G1 {type: select, proxies: [默认代理, 香港自动, 日本自动, 台湾自动, 狮城自动, 美国自动, 全部自动, 全部手动, 直连]}
   S1: &S1 {type: select, proxies: [香港自动, 日本自动, 台湾自动, 狮城自动, 美国自动, 全部自动, 全部手动, 直连]}
-  S5: &S5 {type: url-test, proxies: [直连, DIRECT], interval: 3600, lazy: true, url: "http://connect.rom.miui.com/generate_204"}
   # 节点筛选
   HK: &HK "(?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$"
   JP: &JP "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|美)).)*$"
@@ -142,7 +141,6 @@ proxy-groups:
   - {name: 美国自动, <<: *URL, filter: *US, icon: *Auto}
   - {name: 全部手动, <<: *SD, filter: *Exclude, icon: *All}
   - {name: 全部自动, <<: *URL, filter: *Exclude, icon: *Auto}
-  - {name: 延迟辅助, <<: *S5, icon: *Auto}
   - {name: GLOBAL, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/all.png"}
 
 rules:
