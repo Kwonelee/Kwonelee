@@ -44,7 +44,7 @@ skip-auth-prefixes:
 - 192.168.0.0/16
 allow-lan: true
 bind-address: "*"
-ipv6: false
+ipv6: true
 unified-delay: true
 tcp-concurrent: true
 log-level: info
@@ -96,7 +96,7 @@ sniffer:
 dns:
   enable: true
   cache-algorithm: arc
-  ipv6: false
+  ipv6: true
   enhanced-mode: fake-ip
   fake-ip-ttl: 1
   fake-ip-range: 198.18.0.0/16
