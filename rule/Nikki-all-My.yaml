@@ -134,11 +134,11 @@ proxy-groups:
   - {name: Microsoft, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/microsoft.png"}
   - {name: Apple, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/apple.png"}
   - {name: 漏网之鱼, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/final.png"}
-  - {name: 香港自动, <<: *URL, filter: *HK, icon: *Auto}
-  - {name: 日本自动, <<: *URL, filter: *JP, icon: *Auto}
-  - {name: 台湾自动, <<: *URL, filter: *TW, icon: *Auto}
-  - {name: 狮城自动, <<: *URL, filter: *SG, icon: *Auto}
-  - {name: 美国自动, <<: *URL, filter: *US, icon: *Auto}
+  - {name: 香港自动, <<: *URL, filter: *HK, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/flag/corner/hongkong.png"}
+  - {name: 日本自动, <<: *URL, filter: *JP, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/flag/corner/japan.png"}
+  - {name: 台湾自动, <<: *URL, filter: *TW, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/flag/corner/taiwan.png"}
+  - {name: 狮城自动, <<: *URL, filter: *SG, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/flag/corner/singapore.png"}
+  - {name: 美国自动, <<: *URL, filter: *US, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/flag/corner/usa.png"}
   - {name: 全部手动, <<: *SD, filter: *Exclude, icon: *All}
   - {name: 全部自动, <<: *URL, filter: *Exclude, icon: *Auto}
   - {name: GLOBAL, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/all.png"}
