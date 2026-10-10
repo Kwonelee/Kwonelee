@@ -15,7 +15,6 @@ rule-anchor:
   SD: &SD {type: select, include-all: true}
   URL: &URL {type: url-test, include-all: true, tolerance: 50, interval: 300, lazy: true, url: 'https://www.gstatic.com/generate_204'}
   # ICON
-  Failover: &Failover "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/failover.png"
   Auto: &Auto "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/auto.png"
   All: &All "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/all.png"
   # 规则集
