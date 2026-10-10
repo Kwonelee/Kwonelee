@@ -141,7 +141,7 @@ proxy-groups:
   - {name: 美国自动, <<: *URL, filter: *US, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/flag/corner/usa.png"}
   - {name: 全部手动, <<: *SD, filter: *Exclude, icon: *All}
   - {name: 全部自动, <<: *URL, filter: *Exclude, icon: *Auto}
-  - {name: GLOBAL, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/all.png"}
+  - {name: GLOBAL, <<: *G1, icon: *All}
 
 rules:
   - AND,((RULE-SET,cn!_domain),(DST-PORT,443),(NETWORK,UDP)),REJECT
