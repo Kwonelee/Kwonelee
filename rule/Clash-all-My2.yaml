@@ -102,7 +102,7 @@ dns:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
   nameserver-policy:
-    "rule-set:cn_domain,private_domain,fakeipfilter_cn,steamcn_domain,microsoftcn_domain,applecn_domain":
+    "rule-set:cn_domain,private_domain,fakeipfilter_cn,microsoftcn_domain,applecn_domain":
     - https://dns.alidns.com/dns-query#disable-qtype-65=true
     - https://doh.pub/dns-query#disable-qtype-65=true
     "rule-set:fakeipfilter_!cn":
@@ -121,7 +121,6 @@ dns:
     - rule-set:cn_domain
     - rule-set:microsoftcn_domain
     - rule-set:applecn_domain
-    - rule-set:steamcn_domain
 
 
 proxy-groups:
@@ -161,7 +160,6 @@ rules:
   - RULE-SET,telegram_domain,Telegram
   - RULE-SET,tiktok_domain,TikTok
   - RULE-SET,netflix_domain,NETFLIX
-  - RULE-SET,steamcn_domain,直连
   - RULE-SET,cn!_domain,默认代理
   - RULE-SET,google_ip,Google
   - RULE-SET,apple_ip,Apple
