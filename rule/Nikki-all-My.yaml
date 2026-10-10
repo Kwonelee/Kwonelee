@@ -1,8 +1,8 @@
 rule-anchor:
   P: &P {type: http, interval: 604800, health-check: {enable: false, url: 'https://www.gstatic.com/generate_204', interval: 0}, exclude-filter: "官网|剩余|流量|套餐|订阅|直连|到期时间|GB|Expire Date|Traffic|ExpireDate", proxy: ➡️ 直连}
   # 节点选择
-  G1: &G1 {type: select, proxies: [默认代理, 香港自动, 日本自动, 台湾自动, 狮城自动, 美国自动, 全部自动, 全部手动, ➡️ 直连]}
-  S1: &S1 {type: select, proxies: [香港自动, 日本自动, 台湾自动, 狮城自动, 美国自动, 全部自动, 全部手动, ➡️ 直连]}
+  G1: &G1 {type: select, proxies: [默认代理, CF-手动, 香港自动, 日本自动, 台湾自动, 狮城自动, 美国自动, 全部自动, 全部手动, ➡️ 直连]}
+  S1: &S1 {type: select, proxies: [CF-手动, 香港自动, 日本自动, 台湾自动, 狮城自动, 美国自动, 全部自动, 全部手动, ➡️ 直连]}
   # 节点筛选
   HK: &HK "(?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$"
   JP: &JP "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|美)).)*$"
@@ -22,7 +22,7 @@ rule-anchor:
   domain_text: &domain_text {type: http, interval: 86400, behavior: domain, format: text}
 
 proxy-providers:
-  CF优选: {<<: *P, url: "订阅URL"}
+  CF优选: {<<: *P, url: "订阅URL", override: {additional-prefix: '本地 '}}
 
 proxies:
   - {name: ➡️ 直连, type: direct, udp: true}
@@ -134,13 +134,14 @@ proxy-groups:
   - {name: Microsoft, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/microsoft.png"}
   - {name: Apple, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/apple.png"}
   - {name: 漏网之鱼, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/final.png"}
+  - {name: CF-手动, type: select, include-all: true, filter: "(?=.*(本地|CF)).*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Cloudflare.png}
+  - {name: 全部手动, <<: *SD, filter: *Exclude, icon: *All}
+  - {name: 全部自动, <<: *URL, filter: *Exclude, icon: *Auto}
   - {name: 香港自动, <<: *URL, filter: *HK, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/flag/corner/hongkong.png"}
   - {name: 日本自动, <<: *URL, filter: *JP, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/flag/corner/japan.png"}
   - {name: 台湾自动, <<: *URL, filter: *TW, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/flag/corner/taiwan.png"}
   - {name: 狮城自动, <<: *URL, filter: *SG, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/flag/corner/singapore.png"}
   - {name: 美国自动, <<: *URL, filter: *US, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/flag/corner/usa.png"}
-  - {name: 全部手动, <<: *SD, filter: *Exclude, icon: *All}
-  - {name: 全部自动, <<: *URL, filter: *Exclude, icon: *Auto}
 
 rules:
   - AND,((RULE-SET,cn!_domain),(DST-PORT,443),(NETWORK,UDP)),REJECT
