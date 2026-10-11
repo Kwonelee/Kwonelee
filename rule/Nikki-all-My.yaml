@@ -1,15 +1,15 @@
 rule-anchor:
   P: &P {type: http, interval: 604800, health-check: {enable: false, url: 'https://www.gstatic.com/generate_204', interval: 0}, exclude-filter: "官网|剩余|流量|套餐|订阅|直连|到期时间|GB|Expire Date|Traffic|ExpireDate", proxy: ➡️ 直连}
   # 节点选择
-  G1: &G1 {type: select, proxies: [默认代理, CF手动, 🇭🇰 香港自动, 🇯🇵 日本自动, 🇨🇳 台湾自动, 🇸🇬 狮城自动, 🇺🇸 美国自动, 全部自动, 全部手动, ➡️ 直连]}
-  S1: &S1 {type: select, proxies: [CF手动, 🇭🇰 香港自动, 🇯🇵 日本自动, 🇨🇳 台湾自动, 🇸🇬 狮城自动, 🇺🇸 美国自动, 全部自动, 全部手动, ➡️ 直连]}
+  G1: &G1 {type: select, proxies: [默认代理, CF-手动, 🇭🇰 香港-自动, 🇯🇵 日本-自动, 🇨🇳 台湾-自动, 🇸🇬 狮城-自动, 🇺🇸 美国-自动, 全部-自动, 全部-手动, ➡️ 直连]}
+  S1: &S1 {type: select, proxies: [CF-手动, 🇭🇰 香港-自动, 🇯🇵 日本-自动, 🇨🇳 台湾-自动, 🇸🇬 狮城-自动, 🇺🇸 美国-自动, 全部-自动, 全部-手动, ➡️ 直连]}
   # 节点筛选
   HK: &HK "(?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$"
   JP: &JP "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|美)).)*$"
   TW: &TW "(?=.*(台|TW|(?i)Taiwan))^((?!(港|韩|新|美)).)*$"
   SG: &SG "(?=.*(新加坡|坡|狮城|SG|Singapore))^((?!(港|台|日|韩|ZJ)).)*$"
   US: &US "(?=.*(美|US|(?i)States|America))^((?!(港|台|日|韩|新)).)*$"
-  Exclude: &Exclude "^((?!(官网|剩余|流量|套餐|订阅|到期时间|直连|GB|Expire Date|Traffic|ExpireDate)).)*$"
+  Exclude: &Exclude "^((?!(本地|CF|官网|剩余|流量|套餐|订阅|到期时间|直连|GB|Expire Date|Traffic|ExpireDate)).)*$"
   # 策略组
   SD: &SD {type: select, include-all: true}
   URL: &URL {type: url-test, include-all: true, tolerance: 50, interval: 300, lazy: true, url: 'https://www.gstatic.com/generate_204'}
@@ -134,14 +134,14 @@ proxy-groups:
   - {name: Microsoft, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/microsoft.png"}
   - {name: Apple, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/apple.png"}
   - {name: 漏网之鱼, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/final.png"}
-  - {name: CF手动, type: select, include-all: true, filter: "(?=.*(本地|CF)).*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Cloudflare.png}
-  - {name: 全部手动, <<: *SD, filter: *Exclude, icon: *All}
-  - {name: 全部自动, <<: *URL, filter: *Exclude, icon: *Auto}
-  - {name: 🇭🇰 香港自动, <<: *URL, filter: *HK}
-  - {name: 🇯🇵 日本自动, <<: *URL, filter: *JP}
-  - {name: 🇨🇳 台湾自动, <<: *URL, filter: *TW}
-  - {name: 🇸🇬 狮城自动, <<: *URL, filter: *SG}
-  - {name: 🇺🇸 美国自动, <<: *URL, filter: *US}
+  - {name: CF-手动, <<: *SD, filter: "(?=.*(本地|CF)).*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Cloudflare.png}
+  - {name: 其他-手动, <<: *SD, filter: *Exclude, icon: *All}
+  - {name: 其他-自动, <<: *URL, filter: *Exclude, icon: *Auto}
+  - {name: 🇭🇰 香港-自动, <<: *URL, filter: *HK}
+  - {name: 🇯🇵 日本-自动, <<: *URL, filter: *JP}
+  - {name: 🇨🇳 台湾-自动, <<: *URL, filter: *TW}
+  - {name: 🇸🇬 狮城-自动, <<: *URL, filter: *SG}
+  - {name: 🇺🇸 美国-自动, <<: *URL, filter: *US}
 
 rules:
   - AND,((RULE-SET,cn!_domain),(DST-PORT,443),(NETWORK,UDP)),REJECT
