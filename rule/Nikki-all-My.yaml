@@ -47,7 +47,7 @@ profile:
   store-fake-ip: true
 
 external-controller: 0.0.0.0:9090
-secret: ""
+secret: "123456"
 external-ui: ui
 external-ui-name: zashboard
 external-ui-url: "https://gh-proxy.com/github.com/Zephyruso/zashboard/releases/latest/download/dist.zip"
