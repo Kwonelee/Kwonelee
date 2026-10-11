@@ -1,8 +1,8 @@
 rule-anchor:
   P: &P {type: http, interval: 604800, health-check: {enable: false, url: 'https://www.gstatic.com/generate_204', interval: 0}, exclude-filter: "官网|剩余|流量|套餐|订阅|直连|到期时间|GB|Expire Date|Traffic|ExpireDate", proxy: ➡️ 直连}
   # 节点选择
-  G1: &G1 {type: select, proxies: [默认代理, CF-手动, 🇭🇰 香港-自动, 🇯🇵 日本-自动, 🇨🇳 台湾-自动, 🇸🇬 狮城-自动, 🇺🇸 马来西亚-自动, 其他-自动, 其他-手动, ➡️ 直连]}
-  S1: &S1 {type: select, proxies: [CF-手动, 🇭🇰 香港-自动, 🇯🇵 日本-自动, 🇨🇳 台湾-自动, 🇸🇬 狮城-自动, 🇺🇸 马来西亚-自动, 其他-自动, 其他-手动, ➡️ 直连]}
+  G1: &G1 {type: select, proxies: [默认代理, CF-手动, 🇭🇰 香港-自动, 🇯🇵 日本-自动, 🇨🇳 台湾-自动, 🇸🇬 狮城-自动, 🇲🇾 马来西亚-自动, 其他-自动, 其他-手动, ➡️ 直连]}
+  S1: &S1 {type: select, proxies: [CF-手动, 🇭🇰 香港-自动, 🇯🇵 日本-自动, 🇨🇳 台湾-自动, 🇸🇬 狮城-自动, 🇲🇾 马来西亚-自动, 其他-自动, 其他-手动, ➡️ 直连]}
   # 节点筛选
   HK: &HK "(?=.*(港|HK|H​K|(?i)Hong))^((?!(台|日|韩|新|深|美|马)).)*$"
   JP: &JP "(?=.*(日|JP|J​P|(?i)Japan))^((?!(港|台|韩|新|美|马)).)*$"
