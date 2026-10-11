@@ -121,7 +121,6 @@ dns:
     - rule-set:microsoftcn_domain
     - rule-set:applecn_domain
 
-
 proxy-groups:
   - {name: 默认代理, <<: *S1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/select.png"}
   - {name: AI, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/ai.png"}
