@@ -22,7 +22,8 @@ rule-anchor:
   domain_text: &domain_text {type: http, interval: 86400, behavior: domain, format: text}
 
 proxy-providers:
-  CF优选: {<<: *P, url: "订阅URL", override: {additional-prefix: '本地 '}}
+  CF优选: {<<: *P, url: "XXX", override: {additional-prefix: '本地 '}}
+  #Mia公益: {<<: *P, url: "XXX", override: {additional-prefix: '公益 '}}
 
 proxies:
   - {name: ➡️ 直连, type: direct, udp: true}
