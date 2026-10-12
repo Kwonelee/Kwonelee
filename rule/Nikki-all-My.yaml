@@ -15,8 +15,8 @@ rule-anchor:
   SD: &SD {type: select, include-all: true, empty-fallback: REJECT}
   URL: &URL {type: url-test, include-all: true, empty-fallback: REJECT, tolerance: 50, interval: 300, lazy: true, url: 'https://www.gstatic.com/generate_204'}
   # ICON
-  Auto: &Auto "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/failover.png"
-  All: &All "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/all.png"
+  Auto: &Auto "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/failover.png"
+  All: &All "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/all.png"
   # 规则集
   ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
   domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
@@ -128,17 +128,17 @@ dns:
     - rule-set:applecn_domain
 
 proxy-groups:
-  - {name: 默认代理, <<: *S1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/select.png"}
-  - {name: AI, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/ai.png"}
-  - {name: YouTube, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/youtube.png"}
-  - {name: Google, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/google.png"}
-  - {name: GitHub, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/github.png"}
-  - {name: Telegram, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/telegram.png"}
-  - {name: TikTok, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/douyin.png"}
-  - {name: NETFLIX, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/netflix.png"}
-  - {name: Microsoft, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/microsoft.png"}
-  - {name: Apple, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/apple.png"}
-  - {name: 漏网之鱼, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/final.png"}
+  - {name: 默认代理, <<: *S1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/select.png"}
+  - {name: AI, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/ai.png"}
+  - {name: YouTube, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/youtube.png"}
+  - {name: Google, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/google.png"}
+  - {name: GitHub, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/github.png"}
+  - {name: Telegram, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/telegram.png"}
+  - {name: TikTok, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/douyin.png"}
+  - {name: NETFLIX, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/netflix.png"}
+  - {name: Microsoft, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/microsoft.png"}
+  - {name: Apple, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/apple.png"}
+  - {name: 漏网之鱼, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/final.png"}
   - {name: CF-手动, <<: *SD, filter: "(?=.*(本地|CF)).*$", icon: "https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Clubhouse.png"}
   - {name: 其他-手动, <<: *SD, filter: *Exclude, icon: *All}
   - {name: 其他-自动, <<: *URL, filter: *Exclude, icon: *Auto}
