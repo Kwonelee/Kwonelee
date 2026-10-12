@@ -12,8 +12,8 @@ rule-anchor:
   IN: &IN "(?=.*(印度|IN|I​N|(?i)India))^((?!(港|日|台|新|马|美|韩)).)*$"
   Exclude: &Exclude "^((?!(本地|CF|官网|剩余|流量|套餐|订阅|到期时间|直连|GB|Expire Date|Traffic|ExpireDate)).)*$"
   # 策略组
-  SD: &SD {type: select, include-all: true}
-  URL: &URL {type: url-test, include-all: true, tolerance: 50, interval: 300, lazy: true, url: 'https://www.gstatic.com/generate_204'}
+  SD: &SD {type: select, include-all: true, empty-fallback: REJECT}
+  URL: &URL {type: url-test, include-all: true, empty-fallback: REJECT, tolerance: 50, interval: 300, lazy: true, url: 'https://www.gstatic.com/generate_204'}
   # ICON
   Auto: &Auto "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/failover.png"
   All: &All "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/all.png"
