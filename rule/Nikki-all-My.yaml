@@ -135,7 +135,7 @@ proxy-groups:
   - {name: Microsoft, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/microsoft.png"}
   - {name: Apple, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/apple.png"}
   - {name: 漏网之鱼, <<: *G1, icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/final.png"}
-  - {name: CF-手动, <<: *SD, filter: "(?=.*(本地|CF)).*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Cloudflare.png}
+  - {name: CF-手动, <<: *SD, filter: "(?=.*(本地|CF)).*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Clubhouse.png}
   - {name: 其他-手动, <<: *SD, filter: *Exclude, icon: *All}
   - {name: 其他-自动, <<: *URL, filter: *Exclude, icon: *Auto}
   - {name: 🇭🇰 香港-自动, <<: *URL, filter: *HK}
