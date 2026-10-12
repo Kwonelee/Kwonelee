@@ -40,7 +40,7 @@ bind-address: "*"
 ipv6: true
 unified-delay: true
 tcp-concurrent: true
-log-level: info
+log-level: warning
 keep-alive-idle: 600
 keep-alive-interval: 15
 profile:
