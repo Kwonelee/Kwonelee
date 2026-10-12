@@ -2,24 +2,17 @@
 P: &P {type: http, interval: 604800, health-check: {enable: false, url: "https://www.gstatic.com/generate_204", interval: 0}, proxy: ➡️ 直连}
 # 节点选择
 G1: &G1 {type: select, proxies: [默认节点,CF-手动,其他-自动,🇸🇬 新加坡-自动,🇯🇵 日本-自动,🇭🇰 香港-自动,🇨🇳 台湾-自动,🇲🇾 马来西亚-自动,🗺 其他国家-自动,其他-手动,➡️ 直连,🚫 拒绝]}
-S1: &S1 {type: select, proxies: [➡️ 直连,默认节点]}
+S1: &S1 {type: select, proxies: [CF-手动,其他-自动,🇸🇬 新加坡-自动,🇯🇵 日本-自动,🇭🇰 香港-自动,🇨🇳 台湾-自动,🇲🇾 马来西亚-自动,🗺 其他国家-自动,其他-手动,➡️ 直连,🚫 拒绝]}
+S2: &S2 {type: select, proxies: [➡️ 直连,默认节点]}
 # 策略组
+SD: &SD {type: select, include-all: true}
 URL: &URL {type: url-test, include-all: true, tolerance: 50, interval: 300, lazy: true, empty-fallback: "🚫 拒绝", url: "https://www.gstatic.com/generate_204"}
 ######### 锚点 end #######
 
 # url里填写订阅,名称不能重复
 proxy-providers:
-  CF优选:
-    <<: *P
-    url: "XXX"
-    override:
-      additional-prefix: '本地 '
-
-  Mia公益:
-    <<: *P
-    url: "XXX"
-    override:
-      additional-prefix: '公益 '
+  CF优选: {<<: *P, url: "XXX", override: {additional-prefix: '本地 '}}
+  #Mia公益: {<<: *P, url: "XXX", override: {additional-prefix: '公益 '}}
 
 # 节点信息，可自定义节点
 proxies:
@@ -124,7 +117,7 @@ tun:
 # 策略组定义
 # ========================
 proxy-groups:
-  - {name: 默认节点, type: select, proxies: [CF-手动,其他-自动,🇸🇬 新加坡-自动,🇯🇵 日本-自动,🇭🇰 香港-自动,🇨🇳 台湾-自动,🇲🇾 马来西亚-自动,🗺 其他国家-自动,其他-手动,➡️ 直连,🚫 拒绝], icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Rocket.png}
+  - {name: 默认节点, <<: *S1, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Rocket.png}
   - {name: AI, <<: *G1, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/AI.png}
   - {name: GitHub, <<: *G1, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/GitHub.png}
   - {name: YouTube, <<: *G1, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/YouTube.png}
@@ -136,11 +129,10 @@ proxy-groups:
   - {name: Streaming, <<: *G1, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Streaming!CN.png}
   - {name: Test, <<: *G1, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Speedtest.png}
   - {name: 国外, <<: *G1, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Global.png}
-  - {name: 国内, <<: *S1, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/CN.png}
-  - {name: CF-手动, type: select, include-all: true, filter: "(?=.*(本地|CF)).*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Cloudflare.png}
+  - {name: 国内, <<: *S2, icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/CN.png}
+  - {name: CF-手动, <<: *SD, filter: "(?=.*(本地|CF)).*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Cloudflare.png}
   - {name: 其他-自动, <<: *URL, filter: "^((?!(➡️ 直连|🚫 拒绝|本地|CF)).)*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/LinkCube.png}
-  - {name: 其他-手动, type: select, include-all: true, filter: "^((?!(➡️ 直连|🚫 拒绝|本地|CF)).)*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Clubhouse.png}
-
+  - {name: 其他-手动, <<: *SD, filter: "^((?!(➡️ 直连|🚫 拒绝|本地|CF)).)*$", icon: https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Clubhouse.png}
   - {name: 🇸🇬 新加坡-自动, <<: *URL, filter: "(?=.*(新加坡|SG|S​G|坡|狮城|🇸🇬|Singapore)).*$"}
   - {name: 🇯🇵 日本-自动, <<: *URL, filter: "(?=.*(日本|JP|J​P|东京|大阪|🇯🇵|Japan)).*$"}
   - {name: 🇭🇰 香港-自动, <<: *URL, filter: "(?=.*(香港|HK|H​K|Hong Kong|🇭🇰|HongKong)).*$"}
