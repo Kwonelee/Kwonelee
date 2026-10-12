@@ -29,6 +29,7 @@ proxy-providers:
 proxies:
   - {name: ➡️ 直连, type: direct, udp: true}
 
+mode: rule
 mixed-port: 7890
 authentication:
 - "user:passwd"
