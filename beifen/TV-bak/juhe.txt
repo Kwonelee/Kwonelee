@@ -9,7 +9,7 @@
             "name": "🐂放牛娃"
         },
     {
-            "url": "http://www.饭太硬.cc/tv",
+            "url": "http://fty.xxooo.cf/tv",
             "name": "🍚饭太硬"
         },
     {
