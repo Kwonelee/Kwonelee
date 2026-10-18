@@ -63,7 +63,8 @@ ntp:
 
 tun:
   enable: true
-  stack: mixed   ##如果内核版本大于v1.19.31，此处可以改为自研协议栈 mips ，理论上性能更好。
+  stack: mips # gvisor/mixed/system
+  congestion-controller: cubic # TCP 拥塞控制器：cubic、reno、bbr 或 bbr3；仅在 MIPS 架构上有效
   dns-hijack: ["any:53", "tcp://any:53"]
   auto-route: true
   auto-redirect: true
