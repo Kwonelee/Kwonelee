@@ -64,7 +64,6 @@ ntp:
 tun:
   enable: true
   stack: mips # gvisor/mixed/system
-  congestion-controller: cubic # TCP 拥塞控制器：cubic、reno、bbr 或 bbr3；仅在 MIPS 架构上有效
   dns-hijack: ["any:53", "tcp://any:53"]
   auto-route: true
   auto-redirect: true
