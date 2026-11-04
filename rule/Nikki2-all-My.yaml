@@ -129,26 +129,39 @@ proxy-groups:
   - {name: 🇮🇳 印度-自动, <<: *URL, filter: *IN}
 
 rules:
-  - AND,((RULE-SET,cn!_domain),(DST-PORT,443),(NETWORK,UDP)),REJECT
-  - RULE-SET,private_ip,➡️ 直连,no-resolve
-  - RULE-SET,private_domain,➡️ 直连
-  - RULE-SET,ai_domain,AI
-  - RULE-SET,youtube_domain,YouTube
-  - RULE-SET,google_domain,Google
-  - RULE-SET,github_domain,GitHub
-  - RULE-SET,microsoftcn_domain,➡️ 直连
-  - RULE-SET,microsoft_domain,Microsoft
-  - RULE-SET,applecn_domain,➡️ 直连
-  - RULE-SET,apple_domain,Apple
-  - RULE-SET,telegram_domain,Telegram
-  - RULE-SET,tiktok_domain,TikTok
-  - RULE-SET,netflix_domain,NETFLIX
-  - RULE-SET,cn!_domain,默认代理
-  - RULE-SET,google_ip,Google
-  - RULE-SET,apple_ip,Apple
-  - RULE-SET,telegram_ip,Telegram
-  - RULE-SET,netflix_ip,NETFLIX
-  - RULE-SET,cn_ip,➡️ 直连
+  - AND,((DST-PORT,7890),(IP-CIDR,127.0.0.0/8,no-resolve)),REJECT
+  - AND,((DST-PORT,7890),(IP-CIDR6,::1/128,no-resolve)),REJECT
+# IP检测
+  - RULE-SET,ip-detect,默认代理
+# 直连组
+  - RULE-SET,private,➡️ 直连
+  - RULE-SET,privateip,➡️ 直连,no-resolve
+  - DOMAIN-SUFFIX,gh-proxy.org,➡️ 直连
+  - DOMAIN-SUFFIX,jsdelivr.net,➡️ 直连
+  - RULE-SET,apple-cn,➡️ 直连
+  - RULE-SET,microsoft-cn,➡️ 直连
+  - RULE-SET,googlefcm,➡️ 直连
+# 分流组
+  - RULE-SET,cloudflare,Cloudflare
+  - RULE-SET,ai,AI
+  - RULE-SET,youtube,YouTube
+  - RULE-SET,google,Google
+  - RULE-SET,googleip,Google,no-resolve
+  - RULE-SET,telegram,Telegram
+  - RULE-SET,telegramip,Telegram,no-resolve
+  - RULE-SET,netflix,NETFLIX
+  - RULE-SET,tiktok,TikTok
+  - RULE-SET,github,GitHub
+# 代理组
+  - RULE-SET,apple,默认代理
+  - RULE-SET,docker,默认代理
+  - RULE-SET,twitter,默认代理
+  - RULE-SET,twitterip,默认代理,no-resolve
+  - RULE-SET,microsoft,默认代理
+  - RULE-SET,gfw,默认代理
+# 兜底  
+  - RULE-SET,cn,➡️ 直连
+  - RULE-SET,cnip,➡️ 直连
   - MATCH,漏网之鱼
 
 rule-providers:
