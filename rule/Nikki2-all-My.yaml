@@ -152,9 +152,9 @@ rules:
   - MATCH,漏网之鱼
 
 rule-providers:
+# domain-set
   cn: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cn.mrs }
   gfw: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/gfw.mrs }
-  games-cn: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-games@cn.mrs }
   private: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/private.mrs }
   fakeip-filter: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/wwqgtxx/clash-rules@release/fakeip-filter.mrs }
   google: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/google.mrs }
@@ -163,23 +163,16 @@ rule-providers:
   docker: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/docker.mrs }
   googlefcm: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/googlefcm.mrs }
   ai: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-ai-!cn.mrs }
-  steam: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/steam.mrs }
   apple: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/apple.mrs }
   apple-cn: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/apple@cn.mrs }
   github: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/github.mrs }
-  spotify: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/spotify.mrs }
   tiktok: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/tiktok.mrs }
   twitter: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/twitter.mrs }
   netflix: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/netflix.mrs }
   microsoft: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/microsoft.mrs }
-  npmjs: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/npmjs.mrs }
   microsoft-cn: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/microsoft@cn.mrs }
-  nvidia-cn: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/nvidia@cn.mrs }
   telegram: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/telegram.mrs }
-  tailscale: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/tailscale.mrs }
   ip-detect: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-ip-geo-detect.mrs }
-  nodejs: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/nodejs.mrs }
-  codeberg: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/codeberg.mrs }
 # ip-set
   telegramip: { <<: *base-ruleset-ip, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/telegram.mrs }
   twitterip: { <<: *base-ruleset-ip, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/twitter.mrs }
