@@ -114,7 +114,7 @@ proxy-groups:
   - {name: GitHub, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/github.png"}
   - {name: Telegram, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/telegram.png"}
   - {name: TikTok, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/douyin.png"}
-  - {name: NETFLIX, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/netflix.png"}
+  - {name: Netflix, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/netflix.png"}
   - {name: DNS, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Cellular.png"}
   - {name: Cloudflare, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Cloudflare.png"}
   - {name: 漏网之鱼, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/final.png"}
@@ -149,7 +149,7 @@ rules:
   - RULE-SET,googleip,Google,no-resolve
   - RULE-SET,telegram,Telegram
   - RULE-SET,telegramip,Telegram,no-resolve
-  - RULE-SET,netflix,NETFLIX
+  - RULE-SET,netflix,Netflix
   - RULE-SET,tiktok,TikTok
   - RULE-SET,github,GitHub
 # 代理组
