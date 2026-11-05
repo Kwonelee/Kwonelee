@@ -136,8 +136,9 @@ rules:
 # 直连组
   - RULE-SET,private,➡️ 直连
   - RULE-SET,privateip,➡️ 直连,no-resolve
-  - DOMAIN-SUFFIX,gh-proxy.org,➡️ 直连
+  - DOMAIN-SUFFIX,gh-proxy.com,➡️ 直连
   - DOMAIN-SUFFIX,jsdelivr.net,➡️ 直连
+  - RULE-SET,zerotier,➡️ 直连
   - RULE-SET,apple-cn,➡️ 直连
   - RULE-SET,microsoft-cn,➡️ 直连
   - RULE-SET,googlefcm,➡️ 直连
@@ -185,6 +186,7 @@ rule-providers:
   microsoft: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/microsoft.mrs }
   microsoft-cn: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/microsoft@cn.mrs }
   telegram: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/telegram.mrs }
+  zerotier: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/zerotier.mrs }
   ip-detect: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-ip-geo-detect.mrs }
 # ip-set
   telegramip: { <<: *base-ruleset-ip, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/telegram.mrs }
