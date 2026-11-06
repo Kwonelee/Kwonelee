@@ -156,6 +156,8 @@ rules:
   - RULE-SET,twitterip,默认代理,no-resolve
   - RULE-SET,gfw,默认代理
 # 兜底  
+  - RULE-SET,cn,➡️ 直连
+  - RULE-SET,cnip,➡️ 直连
   - MATCH,规则之外
 
 rule-providers:
@@ -184,3 +186,4 @@ rule-providers:
   twitterip: { <<: *base-ruleset-ip, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/twitter.mrs }
   googleip: { <<: *base-ruleset-ip, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/google.mrs }
   privateip: { <<: *base-ruleset-ip, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/private.mrs }
+  cnip: { <<: *base-ruleset-ip, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/cn.mrs }
