@@ -147,6 +147,7 @@ rules:
   - RULE-SET,telegram,Telegram
   - RULE-SET,telegramip,Telegram,no-resolve
   - RULE-SET,netflix,Netflix
+  - RULE-SET,netflixip,Netflix,no-resolve
 # 代理组
   - RULE-SET,tiktok,默认代理
   - RULE-SET,github,默认代理
@@ -181,6 +182,7 @@ rule-providers:
   ip-detect: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-ip-geo-detect.mrs }
 # ip-set
   telegramip: { <<: *base-ruleset-ip, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/telegram.mrs }
+  netflixip: { <<: *base-ruleset-ip, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/netflix.mrs }
   twitterip: { <<: *base-ruleset-ip, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/twitter.mrs }
   googleip: { <<: *base-ruleset-ip, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/google.mrs }
   privateip: { <<: *base-ruleset-ip, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/private.mrs }
