@@ -151,6 +151,7 @@ rules:
   - RULE-SET,netflix,Netflix
   - RULE-SET,netflixip,Netflix,no-resolve
 # 代理组
+  - DOMAIN-SUFFIX,dpdns.org,默认代理
   - RULE-SET,tiktok,默认代理
   - RULE-SET,github,默认代理
   - RULE-SET,docker,默认代理
