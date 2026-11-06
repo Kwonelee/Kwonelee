@@ -114,7 +114,7 @@ proxy-groups:
   - {name: Netflix, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/netflix.png"}
   - {name: DNS, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Cellular.png"}
   - {name: Cloudflare, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Cloudflare.png"}
-  - {name: 漏网之鱼, <<: *S2, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/final.png"}
+  - {name: 规则之外, <<: *S2, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/final.png"}
   - {name: CF-手动, <<: *SD, filter: "(?=.*(本地|CF)).*$", icon: "https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Clubhouse.png"}
   - {name: 其他-手动, <<: *SD, filter: *Exclude, icon: *All}
   - {name: 其他-自动, <<: *URL, filter: *Exclude, icon: *Auto}
@@ -156,9 +156,7 @@ rules:
   - RULE-SET,twitterip,默认代理,no-resolve
   - RULE-SET,gfw,默认代理
 # 兜底  
-  - RULE-SET,cn,➡️ 直连
-  - RULE-SET,cnip,➡️ 直连
-  - MATCH,漏网之鱼
+  - MATCH,规则之外
 
 rule-providers:
 # domain-set
@@ -186,4 +184,3 @@ rule-providers:
   twitterip: { <<: *base-ruleset-ip, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/twitter.mrs }
   googleip: { <<: *base-ruleset-ip, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/google.mrs }
   privateip: { <<: *base-ruleset-ip, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/private.mrs }
-  cnip: { <<: *base-ruleset-ip, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/cn.mrs }
