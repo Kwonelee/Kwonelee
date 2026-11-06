@@ -56,6 +56,8 @@ tun:
   disable-icmp-forwarding: true
   dns-hijack: ['any:53', 'tcp://any:53']
   stack: mips
+  route-exclude-address-set:
+    - cn_ip
 
 sniffer:
   enable: true
