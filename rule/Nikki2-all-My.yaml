@@ -116,7 +116,7 @@ proxy-groups:
   - {name: Netflix, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/netflix.png"}
   - {name: DNS, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Cellular.png"}
   - {name: Cloudflare, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Cloudflare.png"}
-  - {name: 规则之外, <<: *S2, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/final.png"}
+  - {name: 规则之外, <<: *S2, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/home_broadband.png"}
   - {name: CF-手动, <<: *SD, filter: "(?=.*(本地|CF)).*$", icon: "https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Clubhouse.png"}
   - {name: 其他-手动, <<: *SD, filter: *Exclude, icon: *All}
   - {name: 其他-自动, <<: *URL, filter: *Exclude, icon: *Auto}
