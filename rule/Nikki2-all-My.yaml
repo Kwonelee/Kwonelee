@@ -78,7 +78,6 @@ sniffer:
     - "+.gitv.tv"
     - "+.xiaomi.com"
     - "+.miui.com"
-    - "Mijia Cloud"
     - "+.push.apple.com"
 
 dns:
