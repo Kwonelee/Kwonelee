@@ -21,6 +21,7 @@ rule-anchor:
   # 规则集
   base-ruleset-dn: &base-ruleset-dn { type: http, behavior: domain, proxy: DIRECT, format: mrs, interval: 86400 }
   base-ruleset-ip: &base-ruleset-ip { type: http, behavior: ipcidr, proxy: DIRECT, format: mrs, interval: 86400 }
+  base-ruleset-text: &base-ruleset-text {type: http, behavior: domain, proxy: DIRECT, format: text, interval: 86400}
 
 proxy-providers:
   CF优选: {<<: *P, url: "XXX", override: {additional-prefix: '本地 '}}
