@@ -137,8 +137,7 @@ rules:
 # 直连组
   - RULE-SET,private,➡️ 直连
   - RULE-SET,privateip,➡️ 直连,no-resolve
-  - DOMAIN-SUFFIX,gh-proxy.com,➡️ 直连
-  - DOMAIN-SUFFIX,jsdelivr.net,➡️ 直连
+  - RULE-SET,add-private,➡️ 直连
   - RULE-SET,apple-cn,➡️ 直连
   - RULE-SET,microsoft-cn,➡️ 直连
   - RULE-SET,googlefcm,➡️ 直连
@@ -153,13 +152,13 @@ rules:
   - RULE-SET,netflix,Netflix
   - RULE-SET,netflixip,Netflix,no-resolve
 # 代理组
-  - DOMAIN-SUFFIX,dpdns.org,默认代理
+  - RULE-SET,add-proxy,默认代理
   - RULE-SET,tiktok,默认代理
   - RULE-SET,github,默认代理
   - RULE-SET,docker,默认代理
   - RULE-SET,x,默认代理
   - RULE-SET,gfw,默认代理
-# 兜底  
+# 兜底
   - RULE-SET,cn,➡️ 直连
   - RULE-SET,cnip,➡️ 直连
   - MATCH,规则之外
