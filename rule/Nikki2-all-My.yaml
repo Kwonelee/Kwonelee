@@ -57,8 +57,7 @@ tun:
   auto-detect-interface: true
   endpoint-independent-nat: true
   dns-hijack: ['any:53', 'tcp://any:53']
-  route-exclude-address-set:
-    - cnip
+  route-exclude-address-set: [cnip]
 
 sniffer:
   enable: true
