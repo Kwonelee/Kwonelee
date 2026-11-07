@@ -145,6 +145,7 @@ proxy-groups:
 rules:
   - AND,((DST-PORT,7890),(IP-CIDR,127.0.0.0/8,no-resolve)),REJECT
   - AND,((DST-PORT,7890),(IP-CIDR6,::1/128,no-resolve)),REJECT
+  - RULE-SET,Ads,REJECT
 # IP检测
   - RULE-SET,ip-detect,默认代理
 # 直连组
@@ -179,6 +180,7 @@ rules:
 
 rule-providers:
 # domain-set
+  Ads: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/gogyt/Mihomo@main/rule/Ads.mrs }
   cn: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cn.mrs }
   gfw: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/gfw.mrs }
   private: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/private.mrs }
