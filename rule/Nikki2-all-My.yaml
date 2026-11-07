@@ -50,30 +50,33 @@ keep-alive-idle: 60
 
 tun:
   enable: true
+  stack: mips
   auto-route: true
   strict-route: true
   auto-redirect: true
   auto-detect-interface: true
-  disable-icmp-forwarding: true
+  endpoint-independent-nat: true
   dns-hijack: ['any:53', 'tcp://any:53']
-  stack: mips
   route-exclude-address-set:
     - cnip
 
 sniffer:
   enable: true
   override-destination: false
-  force-dns-mapping: false
   parse-pure-ip: true
+  force-dns-mapping: true
   sniff:
-    HTTP:
-      ports: [80, 8080-8880]
-    TLS:
-      ports: [443, 8443]
-    QUIC:
-      ports: [443, 8443]
+    QUIC: {ports: [443]}
+    TLS:  {ports: [443, 8443]}
+    HTTP: {ports: [80, 8080-8880], override-destination: true}
+  force-domain:
+    - "+.netflix.com"
+    - "+.nflxvideo.net"
+    - "+.media.dssott.com"
+    - "+.tiktok.com"
   skip-domain:
     - "+.mi.com"
+    - "+.gitv.tv"
     - "+.xiaomi.com"
     - "Mijia Cloud"
     - "+.push.apple.com"
@@ -88,7 +91,19 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-range6: 2001:2::1/48
-  fake-ip-filter: ['*', 'rule-set:private', 'rule-set:fakeip-filter','rule-set:cn']
+  fake-ip-filter-mode: blacklist
+  fake-ip-filter:
+    - +.lan
+    - +.local
+    - +.home
+    - +.internal
+    - 'rule-set:private'
+    - 'rule-set:fakeip-filter'
+    - 'rule-set:cn'
+    - +.jsdelivr.net
+    - +.jsdelivr.com
+    - +.jsdmirror.com
+    - +.jsdmirror.cn
   default-nameserver: ['223.5.5.5', '119.29.29.29']
   proxy-server-nameserver: ['https://dns.alidns.com/dns-query#➡️ 直连', 'https://doh.pub/dns-query#➡️ 直连']
   nameserver: ['https://dns.google/dns-query#DNS', 'https://cloudflare-dns.com/dns-query#DNS']
