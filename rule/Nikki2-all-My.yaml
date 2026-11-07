@@ -47,6 +47,7 @@ unified-delay: true
 find-process-mode: strict
 keep-alive-interval: 60
 keep-alive-idle: 60
+profile: {store-selected: true, store-fake-ip: true}
 
 tun:
   enable: true
@@ -117,8 +118,6 @@ hosts:
   'dns.google': ['8.8.8.8', '8.8.4.4']
   'cloudflare-dns.com': ['1.1.1.1', '1.0.0.1']
   'services.googleapis.cn': 'services.googleapis.com'
-
-profile: { store-selected: true, store-fake-ip: true }
 
 ntp:
   enable: true
