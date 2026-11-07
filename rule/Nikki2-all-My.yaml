@@ -184,6 +184,8 @@ rule-providers:
   microsoft-cn: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/microsoft@cn.mrs }
   telegram: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/telegram.mrs }
   ip-detect: { <<: *base-ruleset-dn, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-ip-geo-detect.mrs }
+  add-direct: { <<: *base-ruleset-class, url: https://testingcf.jsdelivr.net/gh/Kwonelee/Kwonelee@main/list/Direct.list }
+  add-proxy: { <<: *base-ruleset-class, url: https://testingcf.jsdelivr.net/gh/Kwonelee/Kwonelee@main/list/Proxy.list }
 # ip-set
   telegramip: { <<: *base-ruleset-ip, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/telegram.mrs }
   netflixip: { <<: *base-ruleset-ip, url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/netflix.mrs }
