@@ -133,7 +133,7 @@ proxy-groups:
   - {name: GitHub, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/github.png"}
   - {name: Telegram, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/telegram.png"}
   - {name: TikTok, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/douyin.png"}
-  - {name: NETFLIX, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/netflix.png"}
+  - {name: Netflix, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/netflix.png"}
   - {name: Microsoft, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/microsoft.png"}
   - {name: Apple, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/apple.png"}
   - {name: 漏网之鱼, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/final.png"}
@@ -161,13 +161,14 @@ rules:
   - RULE-SET,apple_domain,Apple
   - RULE-SET,telegram_domain,Telegram
   - RULE-SET,tiktok_domain,TikTok
-  - RULE-SET,netflix_domain,NETFLIX
+  - RULE-SET,netflix_domain,Netflix
   - RULE-SET,cn!_domain,默认代理
   - RULE-SET,google_ip,Google
   - RULE-SET,apple_ip,Apple
   - RULE-SET,telegram_ip,Telegram
-  - RULE-SET,netflix_ip,NETFLIX
+  - RULE-SET,netflix_ip,Netflix
   - RULE-SET,cn_ip,➡️ 直连
+  - DST-PORT,1-79/81-442/444-65535,➡️ 直连
   - MATCH,漏网之鱼
 
 rule-providers:
