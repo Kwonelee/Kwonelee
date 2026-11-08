@@ -3,6 +3,8 @@ rule-anchor:
   # 节点选择
   G1: &G1 {type: select, proxies: [默认代理, CF-手动, 🇭🇰 香港-自动, 🇯🇵 日本-自动, 🇨🇳 台湾-自动, 🇸🇬 狮城-自动, 🇲🇾 马来-自动, 🇮🇳 印度-自动, 其他-自动, 其他-手动, ➡️ 直连]}
   S1: &S1 {type: select, proxies: [CF-手动, 🇭🇰 香港-自动, 🇯🇵 日本-自动, 🇨🇳 台湾-自动, 🇸🇬 狮城-自动, 🇲🇾 马来-自动, 🇮🇳 印度-自动, 其他-自动, 其他-手动, ➡️ 直连]}
+  S2: &S3 {type: select, proxies: [➡️ 直连, 默认代理]}
+  S3: &S2 {type: select, proxies: [默认代理, ➡️ 直连]}
   # 节点筛选
   HK: &HK "(?=.*(港|HK|H​K|(?i)Hong))^((?!(日|台|新|马|印|美|韩)).)*$"
   JP: &JP "(?=.*(日|JP|J​P|(?i)Japan))^((?!(港|台|新|马|印|美|韩)).)*$"
@@ -18,9 +20,10 @@ rule-anchor:
   Auto: &Auto "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/failover.png"
   All: &All "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/all.png"
   # 规则集
-  ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
-  domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
-  domain_text: &domain_text {type: http, interval: 86400, behavior: domain, format: text}
+  ip: &ip {type: http, interval: 86400, behavior: ipcidr, proxy: ➡️ 直连, format: mrs}
+  domain: &domain {type: http, interval: 86400, behavior: domain, proxy: ➡️ 直连, format: mrs}
+  domain_text: &domain_text {type: http, interval: 86400, behavior: domain, proxy: ➡️ 直连, format: text}
+  domain_class: &domain_class {type: http, interval: 86400, behavior: classical, proxy: ➡️ 直连, format: text}
 
 proxy-providers:
   CF优选: {<<: *P, url: "XXX", override: {additional-prefix: '本地 '}}
@@ -134,9 +137,9 @@ proxy-groups:
   - {name: Telegram, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/telegram.png"}
   - {name: TikTok, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/douyin.png"}
   - {name: Netflix, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/netflix.png"}
-  - {name: Microsoft, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/microsoft.png"}
-  - {name: Apple, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/apple.png"}
-  - {name: 漏网之鱼, <<: *G1, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/final.png"}
+  - {name: Microsoft, <<: *S2, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/microsoft.png"}
+  - {name: Apple, <<: *S2, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/apple.png"}
+  - {name: 漏网之鱼, <<: *S3, icon: "https://testingcf.jsdelivr.net/gh/s0lnce/mofish-icon@main/mihomo/pure/corner/final.png"}
   - {name: CF-手动, <<: *SD, filter: "(?=.*(本地|CF)).*$", icon: "https://testingcf.jsdelivr.net/gh/LancelotRar/policy-icon-set@main/IconSet/Color/Clubhouse.png"}
   - {name: 其他-手动, <<: *SD, filter: *Exclude, icon: *All}
   - {name: 其他-自动, <<: *URL, filter: *Exclude, icon: *Auto}
@@ -151,6 +154,7 @@ rules:
   - AND,((RULE-SET,cn!_domain),(DST-PORT,443),(NETWORK,UDP)),REJECT
   - RULE-SET,private_ip,➡️ 直连,no-resolve
   - RULE-SET,private_domain,➡️ 直连
+  - RULE-SET,add-direct,➡️ 直连
   - RULE-SET,ai_domain,AI
   - RULE-SET,youtube_domain,YouTube
   - RULE-SET,google_domain,Google
@@ -172,26 +176,27 @@ rules:
   - MATCH,漏网之鱼
 
 rule-providers:
-  fakeipfilter_cn: {<<: *domain_text, url: "https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/main/rules/fakeipfilter-cn.list"}
-  fakeipfilter_!cn: {<<: *domain_text, url: "https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/main/rules/fakeipfilter-!cn.list"}
-  private_domain: {<<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/private.mrs"}
-  ai_domain: {<<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-!cn.mrs"}
-  youtube_domain: {<<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/youtube.mrs"}
-  google_domain: {<<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs"}
-  github_domain: {<<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/github.mrs"}
-  microsoftcn_domain: {<<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/microsoft@cn.mrs"}
-  microsoft_domain: {<<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/microsoft.mrs"}
-  applecn_domain: {<<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple@cn.mrs"}
-  apple_domain: {<<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple.mrs"}
-  telegram_domain: {<<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/telegram.mrs"}
-  tiktok_domain: {<<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/tiktok.mrs"}
-  netflix_domain: {<<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/netflix.mrs"}
-  cn!_domain: {<<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/geolocation-!cn.mrs"}
-  cn_domain: {<<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/cn.mrs"}
+  fakeipfilter_cn: {<<: *domain_text, url: "https://gh-proxy.com/https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/main/rules/fakeipfilter-cn.list"}
+  fakeipfilter_!cn: {<<: *domain_text, url: "https://gh-proxy.com/https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/main/rules/fakeipfilter-!cn.list"}
+  private_domain: {<<: *domain, url: "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/private.mrs"}
+  ai_domain: {<<: *domain, url: "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-!cn.mrs"}
+  youtube_domain: {<<: *domain, url: "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/youtube.mrs"}
+  google_domain: {<<: *domain, url: "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs"}
+  github_domain: {<<: *domain, url: "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/github.mrs"}
+  microsoftcn_domain: {<<: *domain, url: "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/microsoft@cn.mrs"}
+  microsoft_domain: {<<: *domain, url: "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/microsoft.mrs"}
+  applecn_domain: {<<: *domain, url: "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple@cn.mrs"}
+  apple_domain: {<<: *domain, url: "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple.mrs"}
+  telegram_domain: {<<: *domain, url: "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/telegram.mrs"}
+  tiktok_domain: {<<: *domain, url: "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/tiktok.mrs"}
+  netflix_domain: {<<: *domain, url: "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/netflix.mrs"}
+  cn!_domain: {<<: *domain, url: "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/geolocation-!cn.mrs"}
+  cn_domain: {<<: *domain, url: "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/cn.mrs"}
+  add-direct: {<<: *domain_class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/Kwonelee/Kwonelee/refs/heads/main/list/Direct.list"}
 
-  google_ip: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
-  apple_ip: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
-  telegram_ip: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/telegram.mrs"}
-  netflix_ip: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/netflix.mrs"}
-  cn_ip: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
-  private_ip: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/private.mrs"}
+  google_ip: {<<: *ip, url: "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
+  apple_ip: {<<: *ip, url: "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
+  telegram_ip: {<<: *ip, url: "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/telegram.mrs"}
+  netflix_ip: {<<: *ip, url: "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/netflix.mrs"}
+  cn_ip: {<<: *ip, url: "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
+  private_ip: {<<: *ip, url: "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/private.mrs"}
