@@ -152,6 +152,8 @@ proxy-groups:
 
 rules:
   - AND,((RULE-SET,cn!_domain),(DST-PORT,443),(NETWORK,UDP)),REJECT
+  - AND,((DST-PORT,7890-7894),(IP-CIDR,127.0.0.0/8,no-resolve)),REJECT
+  - AND,((DST-PORT,7890-7894),(IP-CIDR6,::1/128,no-resolve)),REJECT
   - RULE-SET,private_ip,➡️ 直连,no-resolve
   - RULE-SET,private_domain,➡️ 直连
   - RULE-SET,add_direct,➡️ 直连
@@ -172,7 +174,7 @@ rules:
   - RULE-SET,telegram_ip,Telegram
   - RULE-SET,netflix_ip,Netflix
   - RULE-SET,cn_ip,➡️ 直连
-  - DST-PORT,1-79/81-442/444-65535,➡️ 直连
+  #- DST-PORT,1-79/81-442/444-65535,➡️ 直连
   - MATCH,漏网之鱼
 
 rule-providers:
