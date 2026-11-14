@@ -9,7 +9,7 @@
             "name": "🐟摸鱼儿"
         },
     {
-            "url": "http://fty.xxooo.cf/tv",
+            "url": "https://www.饭太硬.net",
             "name": "🍚饭太硬"
         },
     {
