@@ -17,7 +17,7 @@
             "name": "🐂放牛娃"
         },
     {
-            "url": "https://www.英格里希嗷呜.top/tv",
+            "url": "http://www.英格里希嗷呜.top/tv",
             "name": "👌OK"
         }
     ]
